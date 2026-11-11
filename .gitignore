@@ -1,0 +1,25 @@
+# Shared local-only files
+.local-backup/
+整理临时文件/
+**/.git-local-history/
+**/node_modules/
+**/.venv/
+**/.deps/
+**/.npm-cache/
+**/__pycache__/
+**/.runtime-tmp/
+**/.qw-pages/
+**/runtime/
+**/dist/
+**/_work/
+**/tmp/
+**/cloud-seed/
+**/.env*
+!**/.env.example
+*.log
+*.pyc
+*.sqlite
+*.sqlite-*
+*.parquet
+*.zip
+IE亮剑/docs/competition/qwenwork_multiuser_input/

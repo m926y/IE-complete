@@ -1,0 +1,77 @@
+{
+  "version": "platform-v0.3.1",
+  "bundle": {
+    "name": "IE-Agent-data-v0.3.1.zip",
+    "url": "https://github.com/Karlll330/IE-Agent/releases/download/platform-v0.3.1/IE-Agent-data-v0.3.1.zip",
+    "sha256": "17ecfabf0cda78236a4340bdd1dff3df267e7292eed0e8cea7599fd1a5850aca",
+    "bytes": 309562164
+  },
+  "history": {
+    "sha256": "c58a3092983db7318ae198b5ce34be3f46341c8a830f1bb70f7f506536a90cb8",
+    "bytes": 784048128
+  },
+  "files": {
+    "data/exports/evaluation_rules.csv": {
+      "sha256": "9c1411f651d8c565421ea7b5e251c5c3fda074fe68123333bba78783b96adb78",
+      "bytes": 883
+    },
+    "data/exports/risk_snapshots.csv": {
+      "sha256": "e6dd30f9c4dba9ee1de8ce670b9df8baee3e95de020da30ad5e93fd70b5e2fd9",
+      "bytes": 54932
+    },
+    "data/exports/score_history.csv": {
+      "sha256": "e59ad72e4e94931388af0e47b07863f47d1a4b0f3c7d4e536f918075e5bd680c",
+      "bytes": 7968014
+    },
+    "data/exports/score_snapshots.csv": {
+      "sha256": "1d2323e7f4fece8cfe6d33ba9feb8fcf6ed150eb5522919d97da3ee86c624549",
+      "bytes": 451334
+    },
+    "scoring-data/data/processed/cleaned/imu_daily.parquet": {
+      "sha256": "7d7e0da888673b9a45ad1d2878df4cafeefc0d0fbddad17bcee0a8cfd8608f32",
+      "bytes": 3072248
+    },
+    "scoring-data/data/processed/cleaned/risk_events.parquet": {
+      "sha256": "321792c52085b32a23be34f72d63d314249a35faf003dee64dc210968c472233",
+      "bytes": 113630422
+    },
+    "scoring-data/data/processed/cleaned/trajectory_daily.parquet": {
+      "sha256": "9dbce740fc1d7dd32c1825b522aba6e0bb68d9d361f7b690f9fd150f93dc7a87",
+      "bytes": 1009945
+    },
+    "scoring-data/data/processed/cleaned/vehicle_profile.parquet": {
+      "sha256": "6358d2c3f38d29562266071848ae89e36ec95ff96abca6cd4a2590ca46ec2c24",
+      "bytes": 22172
+    },
+    "var/data-manifest.json": {
+      "sha256": "ee51ea1c7aa65cf580dd0218b50edd78814342444fdef6004cdf2651853597c6",
+      "bytes": 1075
+    },
+    "var/history.sqlite.gz": {
+      "sha256": "24a3b2b84809484427ef6ae54dfa47f808911e687618a6a1323f0eb4a15cc67f",
+      "bytes": 149443300
+    },
+    "var/platform.sqlite": {
+      "sha256": "1ada4b6a1919ac5eda0a0012ff431734239bb8d8e854bde185ec5d081b22f48b",
+      "bytes": 344195072
+    }
+  },
+  "counts": {
+    "drivers": 500,
+    "score_snapshots": 500,
+    "risk_snapshots": 500,
+    "score_history": 4000,
+    "review_queue": 500,
+    "deduction_ledger": 6267,
+    "events": 3152654,
+    "profiles": 500,
+    "event_daily": 198873,
+    "trajectory_daily": 28827,
+    "imu_daily": 14836
+  },
+  "courses": {
+    "total": 18,
+    "approved": 11
+  },
+  "sanitization": "Runtime accounts, sessions, chats, personal feedback, case operations and audit state removed from a backup copy; source database unchanged."
+}

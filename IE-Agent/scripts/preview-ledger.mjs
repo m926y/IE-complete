@@ -1,0 +1,20 @@
+// UI QA on a disposable copy. Never changes the owner's accounts or training records.
+import {DatabaseSync, backup} from 'node:sqlite';
+import {mkdtemp} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {spawn} from 'node:child_process';
+import {startLocalDatabase} from '../server/local-database.mjs';
+import {passwordHash} from '../tests/fixtures/account-db.mjs';
+const root=new URL('../',import.meta.url), dir=await mkdtemp(join(tmpdir(),'ie-ledger-ui-')), path=join(dir,'platform.sqlite');
+const source=new DatabaseSync(fileURLToPath(new URL('var/platform.sqlite',root)),{readOnly:true});
+await backup(source,path);source.close();
+const setup=new DatabaseSync(path);setup.exec('DELETE FROM app_sessions');
+setup.prepare("INSERT INTO app_users(user_id,username,display_name,role,fleet_scope,binding_verified,account_status,password_hash,must_change_password) VALUES('qa-ledger-admin','qa_ledger_admin','页面验证管理员','safety_admin','*',0,'active',?,0)").run(passwordHash('PreviewAdmin2026'));
+setup.close();
+const gateway=await startLocalDatabase({path,manifestPath:new URL('var/data-manifest.json',root)});
+const child=spawn(process.execPath,['server.mjs'],{cwd:root,windowsHide:true,env:{HOST:'127.0.0.1',PORT:'3102',APP_DATA_MODE:'full',SUPABASE_URL:gateway.url,SUPABASE_ANON_KEY:gateway.token,SUPABASE_INSTANCE_ID:'ledger-ui-copy'},stdio:'inherit'});
+console.log('Disposable UI QA: http://127.0.0.1:3102 | Database copy: '+path);
+process.on('SIGINT',()=>child.kill());process.on('SIGTERM',()=>child.kill());
+child.on('exit',async code=>{await gateway.close();process.exit(code||0)});

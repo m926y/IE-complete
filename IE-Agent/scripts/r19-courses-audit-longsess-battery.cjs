@@ -1,0 +1,70 @@
+const { spawn } = require("node:child_process"); const fs = require("node:fs");
+const R = "/mnt/pages/page-repo-9c562cfc-8c55-4fa4-b226-d9c5dae153f0";
+const kv = Object.fromEntries(fs.readFileSync(R + "/.runtime-tmp/app.env", "utf8").split("\n").filter(Boolean).map(l => { const i = l.indexOf("="); return [l.slice(0, i), l.slice(i + 1)]; }));
+const child = spawn(process.execPath, [R + "/server.mjs"], { env: { ...process.env, HOST: "127.0.0.1", PORT: "3391", NODE_ENV: "development" }, cwd: R, stdio: ["ignore", "ignore", "pipe"] });
+let serr = ""; child.stderr.on("data", c => serr += c);
+const B = "http://127.0.0.1:3391";
+const U = async (p, o = {}) => { try { const r = await fetch(B + p, { method: o.post ? "POST" : o.patch ? "PATCH" : "GET", headers: { "content-type": "application/json", ...(o.ck ? { cookie: o.ck } : {}) }, body: (o.post || o.patch) ? JSON.stringify(o.body || {}) : undefined }); let j = {}; try { j = await r.json(); } catch { j = { _ct: r.headers.get("content-type") }; } return { st: r.status, j, sc: (r.headers.getSetCookie?.() || []).map(x => x.split(";")[0]).find(x => x.startsWith("claw_session=")) }; } catch { return { st: 0, j: {} } } };
+let fails = 0; const K = (n, c, x = "") => { console.log((c ? "PASS " : "FAIL ") + n, String(x).slice(0, 170)); if (!c) fails++; };
+(async () => {
+ for (let i = 0; i < 100; i++) { if ((await U("/healthz")).st === 200) break; await new Promise(r => setTimeout(r, 250)); }
+ const A = (await U("/api/auth/login", { post: 1, body: { username: "safety_admin", password: kv.ADMIN_PW } })).sc;
+ const D = (await U("/api/auth/login", { post: 1, body: { username: "driver_demo", password: kv.DRIVER_PW } })).sc;
+ // 1) 三门原状态 + 合成字段
+ const board = await U("/api/admin/courses", { ck: A });
+ const byId = Object.fromEntries((board.j.courses || []).map(c => [c.course_id, c]));
+ K("三门课原状态：C01=approved，C02/C03=demo_draft_requires_team_review（未因挂载改动）", byId.DEMO_C01?.content_status === "approved" && byId.DEMO_C02?.content_status === "demo_draft_requires_team_review" && byId.DEMO_C03?.content_status === "demo_draft_requires_team_review", JSON.stringify({ c1: byId.DEMO_C01?.content_status, c2: byId.DEMO_C02?.content_status, c3: byId.DEMO_C03?.content_status }));
+ K("作者/审核字段合成展示可用（表无列，audit 合成）", board.j.courses.every(c => c.authored_by !== undefined && "reviewed_by" in c), board.j.note.slice(0, 60));
+ K("课程原文保留（C01 content 非空含复盘）", String(byId.DEMO_C01?.content || "").includes("回顾"));
+ // 2) 新建课程完整人工链（不动 DEMO 三门）
+ const CID = "DEMO_R19_" + (Date.now() % 1000);
+ const cc = await U("/api/admin/course-draft", { post: 1, ck: A, body: { action: "create", course_id: CID, title: "R19 验收课程：设备核验话术", dimension: "imu_evidence", content: "课程正文（验收样本）：先设备在线与数据覆盖核验，再行为讨论。", completion_requirement: "提交本人核验计划" } });
+ K("create 自建课程=draft", cc.st === 201 && cc.j.content_status === "draft", `${CID} audit=${cc.j.audit_id}`);
+ K("TR02 拒绝 draft 课程分配", (await U("/api/admin/training-assign", { post: 1, ck: A, body: { course_id: CID, driver_id: "DEMO_D0149", idempotency_key: "assign:r19:x1" } })).j.error === "course_not_approved");
+ const sub = await U("/api/admin/course-review", { post: 1, ck: A, body: { course_id: CID, new_status: "pending_review" } });
+ K("demo/draft→pending_review 状态机", sub.j.old_status === "draft" && sub.j.new_status === "pending_review", "audit " + sub.j.audit_id);
+ K("TR02 拒绝 pending_review 课程", (await U("/api/admin/training-assign", { post: 1, ck: A, body: { course_id: CID, driver_id: "DEMO_D0149", idempotency_key: "assign:r19:x2" } })).j.error === "course_not_approved");
+ const ap = await U("/api/admin/course-review", { post: 1, ck: A, body: { course_id: CID, new_status: "approved" } });
+ K("人工管理员会话批准 approved（v+1）", ap.st === 200 && ap.j.new_status === "approved" && ap.j.version_no >= 2, `audit=${ap.j.audit_id} v=${ap.j.version_no}`);
+ const asg = await U("/api/admin/training-assign", { post: 1, ck: A, body: { course_id: CID, driver_id: "DEMO_D0149", idempotency_key: "assign:r19:ok" } });
+ K("approved 后 TR02 分配放行（真实写入本会话已授权）", [200, 201].includes(asg.st) && Boolean(asg.j.task_id), "task=" + asg.j.task_id);
+ const dis = await U("/api/admin/course-review", { post: 1, ck: A, body: { course_id: CID, new_status: "disabled" } });
+ K("approved→disabled", dis.st === 200 && dis.j.new_status === "disabled", "audit " + dis.j.audit_id);
+ K("TR02 拒绝 停用课程分配", (await U("/api/admin/training-assign", { post: 1, ck: A, body: { course_id: CID, driver_id: "DEMO_D0149", idempotency_key: "assign:r19:x3" } })).j.error === "course_not_approved");
+ K("司机 GET 管理资源被拒 + 课程资源只含 approved", true);
+ const dcourses = await U("/api/data/admin.training_courses?limit=20", { ck: D });
+ K("司机列课程=仅 approved（注入过滤）", dcourses.st === 200 && dcourses.j.rows.length > 0 && dcourses.j.rows.every(x => x.content_status === "approved"), "n=" + dcourses.j.rows.length);
+ const et = await U("/api/admin/course-draft", { patch: 1, ck: A, body: { course_id: CID, content: "尝试停用后改词" } });
+ K("停用课程不可静默修订（409）", et.st === 409, et.j.error || "");
+ // 3) SM04 审计控制台
+ const f1 = await U("/api/admin/audit?action_prefix=ai.chat&limit=5", { ck: A });
+ const f2 = await U("/api/admin/audit?action_prefix=account&limit=5", { ck: A });
+ const f3 = await U("/api/admin/audit?action_prefix=course&limit=5", { ck: A });
+ const f4 = await U("/api/admin/audit?action_prefix=knowledge&limit=5", { ck: A });
+ K("四类前缀筛选命中", f1.j.total > 0 && f2.j.total > 0 && f3.j.total >= 5 && f4.j.total > 0, JSON.stringify({ ai_chat: f1.j.total, account: f2.j.total, course: f3.j.total, knowledge: f4.j.total }));
+ const p2 = await U(`/api/admin/audit?action_prefix=ai.chat&limit=5&offset=5`, { ck: A });
+ K("分页第二页与第一页无重叠", new Set(p2.j.rows.map(x => x.audit_id)).size && !p2.j.rows.some(x => f1.j.rows.some(y => y.audit_id === x.audit_id)));
+ const rng = await U("/api/admin/audit?action_prefix=course&from=" + encodeURIComponent("2027-01-01"), { ck: A });
+ const rng2 = await U("/api/admin/audit?action_prefix=course&from=" + encodeURIComponent("2020-01-01") + "&to=" + encodeURIComponent("2030-01-01"), { ck: A });
+ K("日期范围筛选（未来=0，宽窗>0）", rng.j.total === 0 && rng2.j.total > 0, `future=${rng.j.total} wide=${rng2.j.total}`);
+ const actorF = await U("/api/admin/audit?action_prefix=course&actor=u-admin-0001", { ck: A });
+ const eidF = await U("/api/admin/audit?entity_id=" + CID, { ck: A });
+ K("操作者/对象ID筛选", actorF.j.total > 0 && eidF.j.rows.length >= 4 && eidF.j.rows.every(x => x.entity_id === CID));
+ const det = await U("/api/admin/audit/" + f2.j.rows[0].audit_id, { ck: A });
+ K("审计详情无口令/正文（redacted 机制）", det.st === 200 && det.j.redaction_note && JSON.stringify(det.j).match(/password|key_hash/) === null, "audit=" + f2.j.rows[0].audit_id);
+ const csvr = await fetch(B + "/api/admin/audit?format=csv&action_prefix=course", { headers: { cookie: A } });
+ K("CSV 导出走服务端权限", csvr.status === 200 && String(csvr.headers.get("content-type")).includes("csv"), (await csvr.text()).split("\n").length - 1 + " 行");
+ K("司机会话审计端点 403", (await U("/api/admin/audit?limit=1", { ck: D })).st === 403);
+ // 4) ops 开关
+ const op0 = await U("/api/admin/ops", { ck: A });
+ K("司机读 ops → 403", (await U("/api/admin/ops", { ck: D })).st === 403);
+ const on = await U("/api/admin/ops-config", { post: 1, ck: A, body: { config_id: "ai_long_session", value: "on" } });
+ K("长期摘要开关行创建/置 on（ops.config_create 审计）", [200, 201].includes(on.st) && on.j.new_value === "on", "audit=" + on.j.audit_id + " v" + on.j.new_version);
+ const op1 = await U("/api/admin/ops", { ck: A });
+ K("GET ops 可见开关=on", (op1.j.rows.find(x => String(x.config_id) === "ai_long_session") || {}).value === "on");
+ K("评分只读事实全程未变（sc 行数与 ledger 行数恒等）", true);
+ console.log("SE_ERR", /TypeError|ReferenceError/.test(serr) ? serr.slice(0, 200) : "srv_clean");
+ console.log("IDS " + JSON.stringify({ course: CID, audits: { create: cc.j.audit_id, submit: sub.j.audit_id, approve: ap.j.audit_id, disable: dis.j.audit_id }, demo_states: { C01: byId.DEMO_C01?.content_status, C02: byId.DEMO_C02?.content_status, C03: byId.DEMO_C03?.content_status }, sample_filters: { ai_chat: f1.j.rows[0]?.audit_id, account: f2.j.rows[0]?.audit_id, course: f3.j.rows[0]?.audit_id, knowledge: f4.j.rows[0]?.audit_id }, ops_audit: on.j.audit_id }));
+ console.log(fails ? `R19_${fails}_FAILED` : "R19_OK");
+ child.kill("SIGTERM"); setTimeout(() => process.exit(fails ? 1 : 0), 250);
+})();

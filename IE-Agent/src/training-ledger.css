@@ -1,0 +1,10 @@
+.training-ledger .cards{grid-template-columns:repeat(auto-fit,minmax(125px,1fr))}
+.ledger-filters,.ledger-selection{flex-wrap:wrap;gap:10px}
+.ledger-filters input{min-width:240px;text-align:left}
+.ledger-filters select{max-width:280px}
+.training-ledger input[type=checkbox]{width:17px;height:17px;accent-color:var(--accent);cursor:pointer}
+.training-ledger tr.is-selected{background:var(--info-bg)}
+.training-ledger .tbl td{vertical-align:middle}
+.training-ledger .tbl td:nth-child(3){max-width:380px;white-space:normal}
+.training-ledger .task-delete{color:#a04f71;border-color:#e5cad6;background:#fff8fb}
+.ledger-overdue{color:#b42318;white-space:nowrap}

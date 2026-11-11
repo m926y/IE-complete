@@ -1,0 +1,25 @@
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 671 modules transformed.
+rendering chunks...
+[plugin vite:reporter] 
+(!) [WORKSPACE]/_整理工作/extracted/agent-platform/src/api.ts is dynamically imported by [WORKSPACE]/_整理工作/extracted/agent-platform/src/admin.tsx but also statically imported by [WORKSPACE]/_整理工作/extracted/agent-platform/src/App.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/account.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/action-center.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/admin-driver-reports.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/admin.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/agent-tools.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/case-learning.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/course-editor.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/course-groups.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/custom-learning.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/daily-report.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/dashboard.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/data.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/driver-accounts.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/driver-actions.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/driver-evidence.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/driver-learning.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/driver-notifications.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/driver-shared.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/driver.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/evaluation-actions.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/handover.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/knowledge-library.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/learning-report.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/messaging.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/model-governance.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/model-rules.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/offline-training.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/overview-controls.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/personal-lesson.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/r37.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/risk-actions.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/risk-monitor.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/score-trend.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/sm17.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/sm18.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/sm19.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/sm23.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/training-ledger.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/training-recovery.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/training-ui.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/training.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/ui.tsx, [WORKSPACE]/_整理工作/extracted/agent-platform/src/vehicles.ts, [WORKSPACE]/_整理工作/extracted/agent-platform/src/weights.tsx, dynamic import will not move module into another chunk.
+
+computing gzip size...
+dist/index.html                             0.59 kB │ gzip:   0.38 kB
+dist/assets/index-C1Toox9R.css            147.96 kB │ gzip:  30.76 kB
+dist/assets/account-template-DV055_Td.js    3.46 kB │ gzip:   1.32 kB
+dist/assets/index-BeoRn2gJ.js              13.73 kB │ gzip:   5.41 kB
+dist/assets/browser-BqH-f845.js            15.31 kB │ gzip:   7.37 kB
+dist/assets/purify.es-18JuyMri.js          30.12 kB │ gzip:  11.51 kB
+dist/assets/index-CiKn89xU.js              53.51 kB │ gzip:  14.15 kB
+dist/assets/index.es-ov6sg7b1.js          159.00 kB │ gzip:  53.08 kB
+dist/assets/html2canvas.esm-DXEQVQnt.js   201.04 kB │ gzip:  47.43 kB
+dist/assets/jspdf.es.min-BkgdKemU.js      378.63 kB │ gzip: 122.50 kB
+dist/assets/index-C4MZU1pr.js             803.99 kB │ gzip: 250.10 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 6.24s

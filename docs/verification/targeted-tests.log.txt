@@ -1,0 +1,50 @@
+▶ AI replies render readable Markdown without executing model content
+  ✔ Headings, emphasis, ordered lists and line breaks are readable (12.825ms)
+  ✔ GFM tables, task lists and nested lists retain structure (3.1967ms)
+  ✔ Code and meaningful symbols survive without global stripping (1.1648ms)
+  ✔ Raw HTML, dangerous links and images cannot execute or load (2.0311ms)
+  ✔ Valid source links open safely and plain text still displays (1.0069ms)
+✔ AI replies render readable Markdown without executing model content (198.4835ms)
+✔ Release data manifest contains the complete query and factor-recompute inputs (4.8154ms)
+✔ Distribution bootstrap creates random local accounts, requires a first password change, and preserves existing accounts (1900.4805ms)
+✔ The relative history path works with a temporary business copy and the private full-data gateway (3557.9322ms)
+✔ Model files have no author-specific Python or scoring-data directory (1.7908ms)
+✖ build emits a standalone dynamic QW Page and serves healthy root (189.7444ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 10
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6143.8529
+
+✖ failing tests:
+
+test at tests\runtime.test.mjs:85:1
+✖ build emits a standalone dynamic QW Page and serves healthy root (189.7444ms)
+  Error: npm ci --omit=dev --ignore-scripts --no-audit --no-fund exited with code 1
+  node:internal/modules/cjs/loader:1568
+    throw err;
+    ^
+  
+  Error: Cannot find module '[WORKSPACE]\_整理工作\extracted\agent-platform\runtime\node_modules\npm\bin\npm-cli.js'
+      at Module._resolveFilename (node:internal/modules/cjs/loader:1564:15)
+      at wrapResolveFilename (node:internal/modules/cjs/loader:1118:27)
+      at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1142:10)
+      at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1169:12)
+      at Module._load (node:internal/modules/cjs/loader:1341:5)
+      at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+      at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+      at node:internal/main/run_main_module:33:47 {
+    code: 'MODULE_NOT_FOUND',
+    requireStack: []
+  }
+  
+  Node.js v24.22.2
+  
+      at runCommand (file:///C:/Users/mzy/Desktop/%E8%B5%84%E6%96%99/_%E6%95%B4%E7%90%86%E5%B7%A5%E4%BD%9C/extracted/agent-platform/tests/runtime.test.mjs:63:11)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestContext.<anonymous> (file:///C:/Users/mzy/Desktop/%E8%B5%84%E6%96%99/_%E6%95%B4%E7%90%86%E5%B7%A5%E4%BD%9C/extracted/agent-platform/tests/runtime.test.mjs:114:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)

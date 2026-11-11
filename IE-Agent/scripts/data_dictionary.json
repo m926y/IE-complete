@@ -1,0 +1,1178 @@
+{
+  "drivers": [
+    {
+      "field": "driver_id",
+      "suggested_type": "text",
+      "primary_key": true,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "gpsno",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "display_name",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "fleet_id",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "identity_status",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "mapping_start",
+      "suggested_type": "date",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "mapping_end",
+      "suggested_type": "date",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    }
+  ],
+  "risk_snapshots": [
+    {
+      "field": "gpsno",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "risk_prob",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "risk_rank",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "as_of_date",
+      "suggested_type": "date",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "horizon_days",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "source_version",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "snapshot_id",
+      "suggested_type": "text",
+      "primary_key": true,
+      "null_semantics": "blank is unavailable, not zero"
+    }
+  ],
+  "score_snapshots": [
+    {
+      "field": "gpsno",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "safety_score",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "rank",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "risk_rank_percentile",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "risk_level",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "as_of_date",
+      "suggested_type": "date",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "window_start",
+      "suggested_type": "date",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "reference_version",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "score_method",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "confidence_score",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "confidence_level",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "score_status",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "behavior_safety_score",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "confidence_adjusted_floor",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "observed_behavior_deduction",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "prior_background_deduction",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "gross_reference_deduction",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "uncertainty_reserve",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "score_change_7d",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "history_contribution",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "fatigue_distraction_contribution",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "driving_stability_contribution",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "road_rule_contribution",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "management_contribution",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "imu_evidence_contribution",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "history_event_count",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "fatigue_distraction_event_count",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "driving_stability_event_count",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "road_rule_event_count",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "management_event_count",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "imu_evidence_event_count",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "top_reason_1",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "top_reason_2",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "top_reason_3",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "primary_risk_dimension",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "recommended_action",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "review_cycle",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "forecast_40d_risk_prob",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "review_queue",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "action_deadline",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "immediate_alert",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "driver_id",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "score_id",
+      "suggested_type": "text",
+      "primary_key": true,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "source_version",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    }
+  ],
+  "review_queue": [
+    {
+      "field": "gpsno",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "safety_score",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "risk_level",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "forecast_40d_risk_prob",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "review_queue",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "action_deadline",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "confidence_level",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "top_reason_1",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "queue_id",
+      "suggested_type": "text",
+      "primary_key": true,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "as_of_date",
+      "suggested_type": "date",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "source_version",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    }
+  ],
+  "score_history": [
+    {
+      "field": "gpsno",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "as_of_date",
+      "suggested_type": "date",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "window_start",
+      "suggested_type": "date",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "safety_score",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "rank",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "risk_level",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "confidence_score",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "confidence_level",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "score_method",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "score_status",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "confidence_adjusted_floor",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "history_contribution",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "fatigue_distraction_contribution",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "driving_stability_contribution",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "road_rule_contribution",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "management_contribution",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "imu_evidence_contribution",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "driver_id",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "score_id",
+      "suggested_type": "text",
+      "primary_key": true,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "source_version",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    }
+  ],
+  "deduction_ledger": [
+    {
+      "field": "gpsno",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "event_type",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "dimension",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "event_count",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "decayed_severity",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "dimension_points",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "allocated_points",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "allocation_rule",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "ledger_id",
+      "suggested_type": "text",
+      "primary_key": true,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "as_of_date",
+      "suggested_type": "date",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "source_version",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    }
+  ],
+  "replay_events": [
+    {
+      "field": "gpsno",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "event_time",
+      "suggested_type": "datetime",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "event_type",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "event_name",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "speed_kmh",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "event_id",
+      "suggested_type": "text",
+      "primary_key": true,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "driver_id",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "dimension",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "replay_date",
+      "suggested_type": "date",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "is_replay",
+      "suggested_type": "boolean",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "source_version",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    }
+  ],
+  "evaluation_rules": [
+    {
+      "field": "dimension",
+      "suggested_type": "text",
+      "primary_key": true,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "dimension_name",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "weight",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "window_days",
+      "suggested_type": "number",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "score_method",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "editable",
+      "suggested_type": "boolean",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "source_version",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    }
+  ],
+  "training_courses": [
+    {
+      "field": "course_id",
+      "suggested_type": "text",
+      "primary_key": true,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "title",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "dimension",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "content",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "completion_requirement",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "content_status",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    }
+  ],
+  "operation_config": [
+    {
+      "field": "config_id",
+      "suggested_type": "text",
+      "primary_key": true,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "value",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "unit",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "config_version",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "updated_by",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "updated_at",
+      "suggested_type": "datetime",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    }
+  ],
+  "user_bindings": [
+    {
+      "field": "binding_id",
+      "suggested_type": "text",
+      "primary_key": true,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "platform_user_id",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "role",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "driver_id",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "fleet_id",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "account_status",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    }
+  ],
+  "alerts": [
+    {
+      "field": "alert_id",
+      "suggested_type": "text",
+      "primary_key": true,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "gpsno",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "driver_id",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "rule_code",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "evidence_id",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "occurred_at",
+      "suggested_type": "datetime",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "status",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "is_replay",
+      "suggested_type": "boolean",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "replay_session_id",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "idempotency_key",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "rule_version",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "created_by",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "updated_at",
+      "suggested_type": "datetime",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    }
+  ],
+  "interventions": [
+    {
+      "field": "intervention_id",
+      "suggested_type": "text",
+      "primary_key": true,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "alert_id",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "driver_id",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "status",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "draft_text",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "sent_text",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "sent_at",
+      "suggested_type": "datetime",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "read_at",
+      "suggested_type": "datetime",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "reply_text",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "replied_at",
+      "suggested_type": "datetime",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "created_by",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "closed_by",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "closed_at",
+      "suggested_type": "datetime",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "idempotency_key",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "updated_at",
+      "suggested_type": "datetime",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    }
+  ],
+  "training_tasks": [
+    {
+      "field": "task_id",
+      "suggested_type": "text",
+      "primary_key": true,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "driver_id",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "alert_id",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "course_id",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "goal",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "mandatory",
+      "suggested_type": "boolean",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "due_at",
+      "suggested_type": "datetime",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "status",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "started_at",
+      "suggested_type": "datetime",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "submitted_at",
+      "suggested_type": "datetime",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "learning_record",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "feedback",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "reviewer_id",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "review_note",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "reviewed_at",
+      "suggested_type": "datetime",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "created_by",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "idempotency_key",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "updated_at",
+      "suggested_type": "datetime",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    }
+  ],
+  "audit_logs": [
+    {
+      "field": "audit_id",
+      "suggested_type": "text",
+      "primary_key": true,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "actor_id",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "action",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "entity_type",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "entity_id",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "old_status",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "new_status",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "occurred_at",
+      "suggested_type": "datetime",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    },
+    {
+      "field": "request_id",
+      "suggested_type": "text",
+      "primary_key": false,
+      "null_semantics": "blank is unavailable, not zero"
+    }
+  ]
+}

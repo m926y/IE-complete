@@ -1,0 +1,83 @@
+{
+  "purpose": "新增应用层业务表；不参与预测或安全分计算",
+  "tables": {
+    "review_requests": {
+      "primary_key": "request_id",
+      "fields": {
+        "request_id": "text",
+        "driver_id": "text",
+        "score_id": "text_nullable",
+        "evidence_id": "text_nullable",
+        "reason_code": "text",
+        "description": "text",
+        "status": "text",
+        "review_note": "text_nullable",
+        "reviewer_id": "text_nullable",
+        "source_version": "text",
+        "created_by": "text",
+        "created_at": "datetime",
+        "updated_at": "datetime",
+        "idempotency_key": "text"
+      },
+      "status_values": ["submitted", "checking", "awaiting_data_owner", "answered", "closed"],
+      "rule": "仅本人提交和查看；授权安全员答复；不直接更新只读评分"
+    },
+    "knowledge_articles": {
+      "primary_key": "article_id",
+      "fields": {
+        "article_id": "text",
+        "title": "text",
+        "version": "text",
+        "dimension": "text_nullable",
+        "content": "text",
+        "source_note": "text",
+        "applicable_role": "text",
+        "review_status": "text",
+        "created_by": "text",
+        "reviewed_by": "text_nullable",
+        "reviewed_at": "datetime_nullable",
+        "updated_at": "datetime"
+      },
+      "status_values": ["draft", "pending_review", "approved", "disabled"],
+      "rule": "只有approved版本可供运行时AI正式引用"
+    },
+    "evaluation_rule_drafts": {
+      "primary_key": "draft_id",
+      "fields": {
+        "draft_id": "text",
+        "base_version": "text",
+        "proposal": "text",
+        "status": "text",
+        "created_by": "text",
+        "created_at": "datetime",
+        "reviewed_by": "text_nullable",
+        "reviewed_at": "datetime_nullable",
+        "review_note": "text_nullable",
+        "updated_at": "datetime"
+      },
+      "status_values": ["draft", "pending_review", "archived"],
+      "rule": "始终标未生效；不能通过应用改写现行算法规则或历史快照"
+    },
+    "notification_events": {
+      "primary_key": "notification_id",
+      "fields": {
+        "notification_id": "text",
+        "target_user_id": "text",
+        "source_entity_type": "text",
+        "source_entity_id": "text",
+        "type": "text",
+        "content": "text",
+        "created_at": "datetime",
+        "read_at": "datetime_nullable",
+        "idempotency_key": "text"
+      },
+      "rule": "仅目标用户可读；无真实账号绑定不标已送达"
+    }
+  },
+  "common_rules": [
+    "所有业务ID、driver_id、gpsno、event_type均存文本",
+    "业务写入需角色校验、有效状态转移、唯一主键和幂等键",
+    "关键状态变化写audit_logs，保留操作者及时间",
+    "若平台无法直接设置数据库约束，在服务端写入层实施等效校验并报告限制"
+  ]
+}

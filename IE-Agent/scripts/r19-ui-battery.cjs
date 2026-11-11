@@ -1,0 +1,81 @@
+const { spawn } = require("node:child_process"); const fs = require("node:fs");
+const R2 = "/mnt/pages/page-repo-9c562cfc-8c55-4fa4-b226-d9c5dae153f0";
+const ST = R2 + "/.qw-pages/publish";
+const OUT = "/workspace/5d12ecfd-e7d8-46d4-b63a-4dbb09c2226d/work/output/screenshots";
+const kv = Object.fromEntries(fs.readFileSync(R2 + "/.runtime-tmp/app.env", "utf8").split("\n").filter(Boolean).map(l => { const i = l.indexOf("="); return [l.slice(0, i), l.slice(i + 1)]; }));
+const child = spawn(process.execPath, [ST + "/server.mjs"], { env: { ...process.env, NODE_ENV: "development", HOST: "127.0.0.1", PORT: "3421" }, cwd: ST, stdio: ["ignore", "pipe", "pipe"] });
+const B = "http://127.0.0.1:3421";
+(async () => {
+ for (let i = 0; i < 110; i++) { try { if ((await fetch(B + "/healthz")).status === 200) break; } catch {} await new Promise(r => setTimeout(r, 500)); }
+ const { chromium } = require("/usr/lib/node_modules/playwright");
+ const br = await chromium.launch({ headless: true, args: ["--no-sandbox"] });
+ const pg = await (await br.newContext({ viewport: { width: 1440, height: 940 } })).newPage();
+ pg.on("dialog", d => d.accept());
+ const shot = (n) => pg.screenshot({ path: OUT + "/" + n });
+ let fails = 0; const K = (n, c, x = "") => { console.log((c ? "PASS " : "FAIL ") + n, String(x).slice(0, 150)); if (!c) fails++; };
+ async function login(u, p) {
+  await pg.goto(B + "/", { waitUntil: "networkidle" });
+  const sso = await pg.getByRole("button", { name: /使用工作台账号登录/ }).count();
+  if (sso) { await pg.getByRole("button", { name: /使用工作台账号登录/ }).first().click(); await pg.waitForTimeout(700); }
+  await pg.waitForTimeout(900);
+  await pg.locator("#ln").fill(u); await pg.locator("#pw").fill(p);
+  await pg.locator("button").filter({ hasText: /^登\s*录$/ }).first().click();
+  await pg.waitForTimeout(2300);
+ }
+ async function ensurePanel() { for (let i = 0; i < 10; i++) { if (await pg.evaluate(() => !!document.querySelector(".ai-panel"))) return true; await pg.locator("button.ai-fab").first().click({ force: true }).catch(() => {}); await pg.waitForTimeout(700); } return false; }
+ await login("safety_admin", kv.ADMIN_PW);
+ await pg.evaluate(() => { location.hash = "#/tr-courses"; }); await pg.waitForTimeout(1600);
+ const st0 = await pg.evaluate(() => { const t = document.body.innerText; return { c01: t.includes("已审核·可分配"), c0203: (t.match(/演示草稿·待团队审核/g) || []).length === 2, pw: document.querySelectorAll('input[type=password]').length }; });
+ K("课程列表原状态徽章（C01 approved；C02/C03 待团队审核×2）", st0.c01 && st0.c0203, JSON.stringify(st0));
+ await shot("60_TR05_课程列表原状态_v25本地.png");
+ const CIDUI = "DEMO_UI_R19" + (Date.now() % 1000);
+ await pg.fill('input[aria-label="新课程ID"]', CIDUI);
+ await pg.fill('input[aria-label="新课程标题"]', "UI 验收课程：行前检查话术");
+ await pg.fill('textarea[aria-label="新课程正文"]', "正文（UI 验收）：设备在线→数据覆盖→盲区确认→记录留痕。");
+ await pg.evaluate(() => { const b = [...document.querySelectorAll("button")].find(x => x.textContent.trim() === "创建草稿课程"); if (b) { b.scrollIntoView({ block: "center" }); setTimeout(() => b.click(), 80); } });
+ await pg.waitForTimeout(2000);
+ K("UI 创建课程 draft + 抽屉自动打开", await pg.evaluate((c) => { const t = document.body.innerText; return t.includes("已创建 " + c + "（draft）· 审计 aud-") && t.includes("审核抽屉 · " + c); }, CIDUI));
+ await pg.evaluate(() => { const b = [...document.querySelectorAll("button")].find(x => x.textContent.trim() === "提交审核"); b && b.click(); });
+ await pg.waitForTimeout(1700);
+ K("UI 提交审核 → pending_review", await pg.evaluate(() => /pending_review/.test(document.body.innerText) && document.body.innerText.includes("draft → pending_review")));
+ await pg.evaluate(() => { const b = [...document.querySelectorAll("button")].find(x => x.textContent.includes("批准")); if (b) { b.scrollIntoView({ block: "center" }); setTimeout(() => b.click(), 60); } });
+ await pg.waitForTimeout(2000);
+ const appr = await pg.evaluate(() => { const m = /pending_review → approved · v\d+ · 审计 (aud-[a-f0-9]+)/.exec(document.body.innerText); return m && m[1]; });
+ K("UI 明确确认批准（window.confirm）+ audit_id", Boolean(appr), "approval_audit=" + appr);
+ K("批准后徽章=已审核·可分配", await pg.evaluate((c) => { const r = [...document.querySelectorAll("tr")].find(x => x.innerText.includes(c)); return r ? r.innerText.includes("已审核·可分配") : false; }, CIDUI));
+ await shot("61_TR05_审核抽屉_批准留痕_v25本地.png");
+ await pg.evaluate(() => { location.hash = "#/sm-audit"; }); await pg.waitForTimeout(1500);
+ await pg.selectOption('select[aria-label="审计-action前缀"]', "account"); await pg.waitForTimeout(1300);
+ const sm04 = await pg.evaluate(() => { const t = document.body.innerText; const m = /服务端命中 (\d+) 条/.exec(t); return { total: m && Number(m[1]), hasAudit: t.includes("aud-") }; });
+ K("SM04 action_prefix=account 服务端计数渲染", sm04.total > 3 && sm04.hasAudit, JSON.stringify(sm04));
+ await pg.evaluate(() => { const b = [...document.querySelectorAll("button")].find(x => /^aud-/.test(x.textContent.trim())); b && b.click(); });
+ await pg.waitForTimeout(1400);
+ K("详情弹层存在且不泄口令材料", await pg.evaluate(() => { const t = document.body.innerText; return t.includes("审计详情") && !/password_hash|scrypt\$/i.test(t); }));
+ await shot("62_SM04_筛选与详情_v25本地.png");
+ await pg.locator("button.ai-fab").first().click({ force: true }).catch(() => {}); await pg.waitForTimeout(600); await ensurePanel();
+ K("管理员 AI 面板出现长期摘要开关", (await pg.locator('input[aria-label="长期会话摘要开关"]').count()) === 1);
+ await pg.evaluate(() => { const el = document.querySelector('[aria-label="长期会话摘要开关"]'); if (el && !el.checked) el.click(); });
+ await pg.waitForTimeout(2000);
+ await pg.locator('.ai-panel input[aria-label="AI 提问"]').first().fill("DEMO_UI_R19 系列现在是正式课程了吗？");
+ await pg.locator('.ai-panel button:has-text("发送")').first().click();
+ for (let w = 0; w < 16; w++) { const n = await pg.evaluate(() => (document.querySelector(".ai-panel") || { innerText: "" }).innerText.length); if (n > 300) break; await pg.waitForTimeout(8000); }
+ await pg.waitForTimeout(1200);
+ const ls = await pg.evaluate(() => (localStorage.getItem("claw_ai_long_u-admin-0001") || "").slice(0, 42));
+ K("开关开启：localStorage 写长期摘要（脱敏截断）", ls.startsWith('{"exp"'), "ls_head=" + ls);
+ await pg.locator('button:has-text("退出")').first().click(); await pg.waitForTimeout(2200);
+ await login("safety_admin", kv.ADMIN_PW);
+ await pg.evaluate(() => { sessionStorage.clear(); }); await pg.waitForTimeout(600);
+ await ensurePanel(); await pg.waitForTimeout(700);
+ const restored = await pg.evaluate(() => { const t = (document.querySelector(".ai-panel") || { innerText: "" }).innerText; return { long: t.includes("长期摘要"), banner: t.includes("已加载本设备长期摘要"), leak: /token|claw_session=|sk-[a-z0-9]/i.test(t) }; });
+ K("重登后可见长期摘要（⌛+横幅，无令牌泄漏）", restored.long && restored.banner && !restored.leak, JSON.stringify(restored));
+ await shot("63_AI长期摘要_重登恢复_v25本地.png");
+ await pg.locator('button:has-text("一键清除")').click(); await pg.waitForTimeout(700);
+ K("一键清除后 localStorage 无残留", await pg.evaluate(() => !localStorage.getItem("claw_ai_long_u-admin-0001")));
+ await pg.evaluate(() => { const el = document.querySelector('[aria-label="长期会话摘要开关"]'); if (el && el.checked) el.click(); }); await pg.waitForTimeout(1000);
+ await pg.locator('button:has-text("退出")').first().click(); await pg.waitForTimeout(2100);
+ await login("driver_demo", kv.DRIVER_PW); await ensurePanel(); await pg.waitForTimeout(800);
+ const drv = await pg.evaluate(() => { const p = document.querySelector(".ai-panel") || { innerText: "" }; return { hasToggle: p.innerText.includes("重登后保留脱敏摘要"), cards: document.querySelectorAll(".ai-panel .task-card").length }; });
+ K("司机面板：无长期开关、无管理员摘要（空会话）", !drv.hasToggle && drv.cards === 0, JSON.stringify(drv));
+ await br.close();
+ console.log(fails ? `UI19_${fails}_FAILED` : "UI19_OK"); child.kill("SIGTERM"); setTimeout(() => process.exit(fails ? 1 : 0), 250);
+})().catch(e => { console.error("UI19_ERR", String(e.message).slice(0, 220)); child.kill("SIGTERM"); setTimeout(() => process.exit(1), 250); });

@@ -1,0 +1,48 @@
+{
+  "name": "xing-an-ie-agent",
+  "version": "0.3.1",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build && node scripts/prepare-publish.mjs",
+    "preview": "vite preview --host 0.0.0.0",
+    "start": "node server.mjs",
+    "start:local": "node scripts/start-local.mjs",
+    "test:full-data": "node --test tests/full-data.test.mjs",
+    "test:weights": "node --test tests/scoring-weights.test.mjs",
+    "typecheck": "tsc --noEmit",
+    "test:accounts": "node --test tests/accounts.test.mjs",
+    "preview:accounts": "npm run build && node scripts/preview-accounts.mjs",
+    "test": "npm run build && node --test tests/runtime.test.mjs",
+    "test:agent-tools": "node --test tests/agent-tools.test.mjs",
+    "test:risk": "node --test tests/risk-monitor.test.mjs tests/risk-monitor-api.test.mjs",
+    "data:install": "python scripts/install-data.py",
+    "setup:local": "node scripts/setup-local.mjs",
+    "test:distribution": "node --test tests/distribution.test.mjs"
+  },
+  "dependencies": {
+    "html-to-image": "1.11.13",
+    "jspdf": "3.0.3",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-markdown": "10.1.0",
+    "remark-breaks": "4.0.0",
+    "remark-gfm": "4.0.1"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.31",
+    "@types/react-dom": "18.3.7",
+    "@vitejs/plugin-react": "5.2.0",
+    "fflate": "0.8.3",
+    "read-excel-file": "9.3.12",
+    "typescript": "5.8.3",
+    "vite": "7.3.6"
+  },
+  "overrides": {
+    "electron-to-chromium": "1.5.395"
+  }
+}

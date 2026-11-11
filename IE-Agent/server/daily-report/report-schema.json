@@ -1,0 +1,476 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://ie-agent.local/schemas/daily-safety-report-v2",
+ "title": "ValidatedDailySafetyReport",
+ "type": "object",
+ "additionalProperties": false,
+ "required": [
+  "schemaVersion",
+  "reportDate",
+  "driverId",
+  "dataAsOf",
+  "dataStatus",
+  "sourceFingerprint",
+  "title",
+  "summary",
+  "metrics",
+  "risks",
+  "cards",
+  "dailyGoal",
+  "goalTracking",
+  "approvedCourseRefs",
+  "coverage",
+  "dataLimitations",
+  "scoreTrend"
+ ],
+ "properties": {
+  "schemaVersion": {
+   "const": 2
+  },
+  "reportDate": {
+   "type": "string",
+   "format": "date"
+  },
+  "driverId": {
+   "type": "string"
+  },
+  "dataAsOf": {
+   "type": "string"
+  },
+  "dataStatus": {
+   "const": "historical_replay"
+  },
+  "sourceFingerprint": {
+   "type": "string"
+  },
+  "title": {
+   "type": "string",
+   "maxLength": 120
+  },
+  "summary": {
+   "type": "string",
+   "maxLength": 500
+  },
+  "metrics": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": [
+    "personalScore",
+    "personalScoreDate",
+    "scoreEvidenceId",
+    "scoreChange",
+    "scoreComparisonStatus",
+    "scoreConfidence",
+    "fleetAverage",
+    "fleetScoredDrivers",
+    "fleetDate",
+    "riskCount7d",
+    "riskRate"
+   ],
+   "properties": {
+    "personalScore": {
+     "type": [
+      "number",
+      "null"
+     ]
+    },
+    "personalScoreDate": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "scoreEvidenceId": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "scoreChange": {
+     "type": [
+      "number",
+      "null"
+     ]
+    },
+    "scoreComparisonStatus": {
+     "type": "string"
+    },
+    "scoreConfidence": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "fleetAverage": {
+     "type": [
+      "number",
+      "null"
+     ]
+    },
+    "fleetScoredDrivers": {
+     "type": [
+      "integer",
+      "null"
+     ]
+    },
+    "fleetDate": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "riskCount7d": {
+     "type": [
+      "integer",
+      "null"
+     ]
+    },
+    "riskRate": {
+     "type": [
+      "number",
+      "null"
+     ]
+    }
+   }
+  },
+  "risks": {
+   "type": "array",
+   "maxItems": 3,
+   "items": {
+    "$ref": "#/$defs/risk"
+   }
+  },
+  "cards": {
+   "type": "array",
+   "maxItems": 6,
+   "items": {
+    "$ref": "#/$defs/card"
+   }
+  },
+  "dailyGoal": {
+   "anyOf": [
+    {
+     "type": "null"
+    },
+    {
+     "$ref": "#/$defs/goal"
+    }
+   ]
+  },
+  "goalTracking": {
+   "anyOf": [
+    {
+     "type": "null"
+    },
+    {
+     "$ref": "#/$defs/goalTracking"
+    }
+   ]
+  },
+  "approvedCourseRefs": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "coverage": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": [
+    "source",
+    "observedDates",
+    "firstOwnedEventAt",
+    "complete7d",
+    "complete30d",
+    "exposureAvailable"
+   ],
+   "properties": {
+    "source": {
+     "const": "historical_replay"
+    },
+    "observedDates": {
+     "type": "array",
+     "items": {
+      "type": "string",
+      "format": "date"
+     }
+    },
+    "firstOwnedEventAt": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "complete7d": {
+     "type": "boolean"
+    },
+    "complete30d": {
+     "type": "boolean"
+    },
+    "exposureAvailable": {
+     "type": "boolean"
+    }
+   }
+  },
+  "dataLimitations": {
+   "type": "array",
+   "items": {
+    "type": "string",
+    "maxLength": 300
+   }
+  },
+  "scoreTrend": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": [
+    "basis",
+    "dates",
+    "personal",
+    "fleet",
+    "note"
+   ],
+   "properties": {
+    "basis": {
+     "type": "string",
+     "maxLength": 200
+    },
+    "dates": {
+     "type": "array",
+     "maxItems": 7,
+     "items": {
+      "type": "string",
+      "format": "date"
+     }
+    },
+    "personal": {
+     "type": "array",
+     "maxItems": 7,
+     "items": {
+      "type": [
+       "number",
+       "null"
+      ]
+     }
+    },
+    "fleet": {
+     "type": "array",
+     "maxItems": 7,
+     "items": {
+      "type": [
+       "number",
+       "null"
+      ]
+     }
+    },
+    "fleetComparableCount": {
+     "type": "array",
+     "maxItems": 7,
+     "items": {
+      "type": [
+       "integer",
+       "null"
+      ]
+     }
+    },
+    "note": {
+     "type": "string",
+     "maxLength": 300
+    }
+   }
+  },
+  "narrative": {
+   "type": [
+    "object",
+    "null"
+   ]
+  },
+  "narrativeMeta": {
+   "type": [
+    "object",
+    "null"
+   ]
+  }
+ },
+ "$defs": {
+  "risk": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": [
+    "eventType",
+    "eventName",
+    "dimension",
+    "observedCount",
+    "priority",
+    "priorityBasis",
+    "priorityScore",
+    "firstObservedAt",
+    "lastObservedAt",
+    "evidenceRefs"
+   ],
+   "properties": {
+    "eventType": {
+     "type": "string"
+    },
+    "eventName": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "dimension": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "observedCount": {
+     "type": "integer"
+    },
+    "priority": {
+     "type": "integer"
+    },
+    "priorityBasis": {
+     "const": "observed_replay_count"
+    },
+    "priorityScore": {
+     "type": "null"
+    },
+    "firstObservedAt": {
+     "type": "string"
+    },
+    "lastObservedAt": {
+     "type": "string"
+    },
+    "evidenceRefs": {
+     "type": "array",
+     "maxItems": 5,
+     "items": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "card": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": [
+    "type",
+    "priority",
+    "title",
+    "description",
+    "evidenceRefs"
+   ],
+   "properties": {
+    "type": {
+     "enum": [
+      "risk_insight",
+      "action",
+      "learning_tip"
+     ]
+    },
+    "priority": {
+     "type": "integer"
+    },
+    "title": {
+     "type": "string"
+    },
+    "description": {
+     "type": "string"
+    },
+    "evidenceRefs": {
+     "type": "array",
+     "maxItems": 5,
+     "items": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "goal": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": [
+    "type",
+    "description",
+    "status",
+    "recommendationBasis",
+    "scoreEvidenceRef",
+    "evidenceRefs"
+   ],
+   "properties": {
+    "type": {
+     "const": "evidence_review"
+    },
+    "description": {
+     "type": "string"
+    },
+    "status": {
+     "const": "pending_evidence"
+    },
+    "recommendationBasis": {
+     "enum": [
+      "source_score_action",
+      "historical_event_review"
+     ]
+    },
+    "scoreEvidenceRef": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "evidenceRefs": {
+     "type": "array",
+     "maxItems": 5,
+     "items": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "goalTracking": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": [
+    "previousGoalId",
+    "previousReportDate",
+    "previousStatus",
+    "previousFeedbackCode",
+    "newEvidence",
+    "assessment",
+    "note"
+   ],
+   "properties": {
+    "previousGoalId": {
+     "type": "integer"
+    },
+    "previousReportDate": {
+     "type": "string",
+     "format": "date"
+    },
+    "previousStatus": {
+     "enum": [
+      "active",
+      "dismissed"
+     ]
+    },
+    "previousFeedbackCode": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "newEvidence": {
+     "type": "boolean"
+    },
+    "assessment": {
+     "const": "pending_evidence"
+    },
+    "note": {
+     "type": "string",
+     "maxLength": 300
+    }
+   }
+  }
+ }
+}

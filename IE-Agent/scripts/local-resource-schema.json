@@ -1,0 +1,479 @@
+{
+  "admin.events": {
+    "table": "replay_events",
+    "order": "event_date.desc",
+    "cols": "event_id,gpsno,driver_id,event_date,event_time,event_type,event_name,speed_kmh,dimension,coordinate_valid,speed_valid,source_version",
+    "roles": [
+      "safety_admin",
+      "team_leader"
+    ],
+    "cap": null,
+    "filters": [
+      "gpsno",
+      "event_date",
+      "event_type"
+    ]
+  },
+  "my.events": {
+    "table": "replay_events",
+    "order": "event_date.desc",
+    "cols": "event_id,gpsno,driver_id,event_date,event_time,event_type,event_name,speed_kmh,dimension,coordinate_valid,speed_valid,source_version",
+    "roles": [
+      "driver"
+    ],
+    "cap": null,
+    "filters": [
+      "gpsno",
+      "event_date",
+      "event_type"
+    ],
+    "injectDriver": "driver_id"
+  },
+  "admin.event_daily": {
+    "table": "local_event_daily",
+    "order": "event_date.desc",
+    "cols": "gpsno,driver_id,event_date,event_type,event_name,event_count",
+    "roles": [
+      "safety_admin",
+      "team_leader"
+    ],
+    "cap": null,
+    "filters": [
+      "gpsno",
+      "event_date",
+      "event_type"
+    ]
+  },
+  "my.event_daily": {
+    "table": "local_event_daily",
+    "order": "event_date.desc",
+    "cols": "gpsno,driver_id,event_date,event_type,event_name,event_count",
+    "roles": [
+      "driver"
+    ],
+    "cap": null,
+    "filters": [
+      "gpsno",
+      "event_date",
+      "event_type"
+    ],
+    "injectDriver": "driver_id"
+  },
+  "admin.trajectory_daily": {
+    "table": "local_trajectory_daily",
+    "order": "event_date.desc",
+    "cols": "gpsno,driver_id,event_date,source_rows,distance_km,reported_run_time_hours,speed_mean_kmh,speed_max_kmh,invalid_speed_rows,invalid_coordinate_rows",
+    "roles": [
+      "safety_admin",
+      "team_leader"
+    ],
+    "cap": null,
+    "filters": [
+      "gpsno",
+      "event_date",
+      "event_type"
+    ]
+  },
+  "my.trajectory_daily": {
+    "table": "local_trajectory_daily",
+    "order": "event_date.desc",
+    "cols": "gpsno,driver_id,event_date,source_rows,distance_km,reported_run_time_hours,speed_mean_kmh,speed_max_kmh,invalid_speed_rows,invalid_coordinate_rows",
+    "roles": [
+      "driver"
+    ],
+    "cap": null,
+    "filters": [
+      "gpsno",
+      "event_date",
+      "event_type"
+    ],
+    "injectDriver": "driver_id"
+  },
+  "admin.imu_daily": {
+    "table": "local_imu_daily",
+    "order": "event_date.desc",
+    "cols": "gpsno,driver_id,event_date,source_rows,gps_speed_mean,gps_speed_max,missing_accel_rows,missing_gyro_rows,accel_norm_outlier_samples,gyro_norm_gt20_samples",
+    "roles": [
+      "safety_admin",
+      "team_leader"
+    ],
+    "cap": null,
+    "filters": [
+      "gpsno",
+      "event_date",
+      "event_type"
+    ]
+  },
+  "my.imu_daily": {
+    "table": "local_imu_daily",
+    "order": "event_date.desc",
+    "cols": "gpsno,driver_id,event_date,source_rows,gps_speed_mean,gps_speed_max,missing_accel_rows,missing_gyro_rows,accel_norm_outlier_samples,gyro_norm_gt20_samples",
+    "roles": [
+      "driver"
+    ],
+    "cap": null,
+    "filters": [
+      "gpsno",
+      "event_date",
+      "event_type"
+    ],
+    "injectDriver": "driver_id"
+  },
+  "admin.profiles": {
+    "table": "local_profiles",
+    "order": "gpsno.asc",
+    "cols": "gpsno,driver_id,energy_type,monthly_mileage_km,monthly_drive_hours,monthly_stop_count,highway_mileage_ratio,morning_drive_time_ratio,dusk_drive_time_ratio,night_drive_time_ratio,night_mileage_ratio",
+    "roles": [
+      "safety_admin",
+      "team_leader"
+    ],
+    "cap": null,
+    "filters": [
+      "gpsno",
+      "event_date",
+      "event_type"
+    ]
+  },
+  "my.profiles": {
+    "table": "local_profiles",
+    "order": "gpsno.asc",
+    "cols": "gpsno,driver_id,energy_type,monthly_mileage_km,monthly_drive_hours,monthly_stop_count,highway_mileage_ratio,morning_drive_time_ratio,dusk_drive_time_ratio,night_drive_time_ratio,night_mileage_ratio",
+    "roles": [
+      "driver"
+    ],
+    "cap": null,
+    "filters": [
+      "gpsno",
+      "event_date",
+      "event_type"
+    ],
+    "injectDriver": "driver_id"
+  },
+  "admin.drivers": {
+    "table": "drivers",
+    "order": "driver_id.asc",
+    "cols": "driver_id,gpsno,display_name,fleet_id,identity_status,mapping_start,mapping_end,source_version",
+    "roles": [
+      "safety_admin",
+      "team_leader"
+    ],
+    "cap": "view.driver_detail",
+    "filters": [
+      "driver_id",
+      "gpsno",
+      "fleet_id",
+      "identity_status"
+    ]
+  },
+  "admin.score_snapshots": {
+    "table": "score_snapshots",
+    "order": "safety_score.asc",
+    "cols": "score_id,gpsno,driver_id,safety_score,rank,risk_level,score_change_7d,confidence_score,confidence_level,score_status,as_of_date,window_start,top_reason_1,top_reason_2,top_reason_3,primary_risk_dimension,recommended_action,review_cycle,behavior_safety_score,confidence_adjusted_floor,forecast_40d_risk_prob,review_queue,immediate_alert,source_version,history_contribution,fatigue_distraction_contribution,driving_stability_contribution,road_rule_contribution,management_contribution,imu_evidence_contribution",
+    "roles": [
+      "safety_admin",
+      "team_leader"
+    ],
+    "cap": "view.driver_detail",
+    "filters": [
+      "confidence_level",
+      "risk_level",
+      "as_of_date",
+      "driver_id",
+      "gpsno",
+      "score_status",
+      "primary_risk_dimension"
+    ]
+  },
+  "admin.risk_snapshots": {
+    "table": "risk_snapshots",
+    "order": "risk_rank.asc",
+    "cols": "snapshot_id,gpsno,risk_prob,risk_rank,as_of_date,horizon_days,source_version",
+    "roles": [
+      "safety_admin",
+      "team_leader"
+    ],
+    "cap": "view.fleet_overview",
+    "filters": [
+      "gpsno",
+      "as_of_date"
+    ]
+  },
+  "admin.review_queue": {
+    "table": "review_queue",
+    "order": "safety_score.asc",
+    "cols": "queue_id,gpsno,safety_score,risk_level,forecast_40d_risk_prob,review_queue,action_deadline,confidence_level,top_reason_1,as_of_date,source_version",
+    "roles": [
+      "safety_admin",
+      "team_leader"
+    ],
+    "cap": "view.fleet_overview",
+    "filters": [
+      "gpsno",
+      "confidence_level",
+      "risk_level",
+      "review_queue",
+      "as_of_date"
+    ]
+  },
+  "admin.replay_events": {
+    "table": "replay_events",
+    "order": "event_time.asc",
+    "cols": "event_id,gpsno,driver_id,event_time,event_type,event_name,speed_kmh,dimension,replay_date,is_replay,source_version",
+    "roles": [
+      "safety_admin",
+      "team_leader"
+    ],
+    "cap": "view.replay",
+    "filters": [
+      "gpsno",
+      "replay_date"
+    ]
+  },
+  "admin.deduction_ledger": {
+    "table": "deduction_ledger",
+    "order": "ledger_id.asc",
+    "cols": "ledger_id,gpsno,event_type,dimension,event_count,decayed_severity,allocated_points,dimension_points,allocation_rule,as_of_date,source_version",
+    "roles": [
+      "safety_admin",
+      "team_leader"
+    ],
+    "cap": "view.driver_detail",
+    "filters": [
+      "gpsno",
+      "dimension"
+    ]
+  },
+  "admin.score_history": {
+    "table": "score_history",
+    "order": "as_of_date.asc",
+    "cols": "score_id,gpsno,driver_id,as_of_date,safety_score,rank,risk_level,confidence_score,confidence_level,score_status,history_contribution,fatigue_distraction_contribution,driving_stability_contribution,road_rule_contribution,management_contribution,imu_evidence_contribution,source_version",
+    "roles": [
+      "safety_admin",
+      "team_leader"
+    ],
+    "cap": "view.driver_detail",
+    "filters": [
+      "gpsno",
+      "driver_id",
+      "as_of_date"
+    ]
+  },
+  "admin.trainings": {
+    "table": "training_tasks",
+    "order": "updated_at.desc",
+    "cols": "task_id,driver_id,alert_id,course_id,goal,mandatory,due_at,status,submitted_at,reviewed_at,created_by,updated_at",
+    "roles": [
+      "safety_admin",
+      "team_leader"
+    ],
+    "cap": "assign.training",
+    "filters": [
+      "alert_id",
+      "status",
+      "driver_id",
+      "task_id"
+    ]
+  },
+  "admin.notifications": {
+    "table": "notification_events",
+    "order": "created_at.desc",
+    "cols": "notification_id,target_user_id,source_entity_type,source_entity_id,type,title,content,read_at,created_at",
+    "roles": [
+      "safety_admin"
+    ],
+    "cap": "send.intervention",
+    "filters": [
+      "source_entity_id",
+      "target_user_id",
+      "type"
+    ]
+  },
+  "admin.interventions": {
+    "table": "interventions",
+    "order": "updated_at.desc",
+    "cols": "intervention_id,alert_id,driver_id,status,draft_text,sent_text,sent_at,read_at,reply_text,replied_at,created_by,updated_at",
+    "roles": [
+      "safety_admin"
+    ],
+    "cap": "send.intervention",
+    "filters": [
+      "alert_id",
+      "driver_id",
+      "status"
+    ]
+  },
+  "admin.alerts": {
+    "table": "alerts",
+    "order": "occurred_at.desc",
+    "cols": "alert_id,gpsno,driver_id,rule_code,evidence_id,occurred_at,status,is_replay,owner_user_id,due_at,close_reason,updated_at",
+    "roles": [
+      "safety_admin",
+      "team_leader"
+    ],
+    "cap": "view.alerts",
+    "filters": [
+      "status",
+      "gpsno",
+      "rule_code"
+    ]
+  },
+  "admin.review_requests": {
+    "table": "review_requests",
+    "order": "created_at.desc",
+    "cols": "request_id,driver_id,target_type,score_id,evidence_id,reason_code,description,status,reviewer_id,created_at,handled_at",
+    "roles": [
+      "safety_admin"
+    ],
+    "cap": "review.score_challenge"
+  },
+  "admin.training_courses": {
+    "table": "training_courses",
+    "order": "course_id.asc",
+    "cols": "course_id,title,dimension,content,completion_requirement,content_status,version_no,source_version,updated_at",
+    "roles": [
+      "safety_admin",
+      "team_leader",
+      "driver"
+    ],
+    "cap": null
+  },
+  "admin.evaluation_rules": {
+    "table": "evaluation_rules",
+    "order": "dimension.asc",
+    "cols": "dimension,dimension_name,weight,window_days,score_method,editable,source_version",
+    "roles": [
+      "safety_admin",
+      "team_leader"
+    ],
+    "cap": null
+  },
+  "admin.operation_config": {
+    "table": "operation_config",
+    "order": "config_id.asc",
+    "cols": "config_id,value,unit,config_version,updated_by,updated_at,effective_at",
+    "roles": [
+      "safety_admin"
+    ],
+    "cap": "manage.operation_config"
+  },
+  "admin.accounts": {
+    "table": "app_users",
+    "order": "user_id.asc",
+    "cols": "avatar_url,must_change_password,user_id,username,display_name,role,fleet_scope,default_fleet_id,driver_id,binding_verified,binding_note,account_status,last_login_at",
+    "roles": [
+      "safety_admin"
+    ],
+    "cap": "manage.accounts"
+  },
+  "admin.bindings": {
+    "table": "user_bindings",
+    "order": "binding_id.asc",
+    "cols": "binding_id,platform_user_id,user_id,role,driver_id,fleet_id,account_status,identity_status,effective_start,effective_end,note,updated_at",
+    "roles": [
+      "safety_admin"
+    ],
+    "cap": "manage.bindings"
+  },
+  "admin.import_runs": {
+    "table": "import_runs",
+    "order": "created_at.desc",
+    "cols": "run_id,filename,target_table,source_version,check_status,row_total,accepted_count,rejected_count,dup_pk_count,type_error_count,unknown_columns,actor_id,created_at,committed_at,created_audit_id,commit_audit_id",
+    "roles": [
+      "safety_admin"
+    ],
+    "cap": "import.data"
+  },
+  "admin.audit": {
+    "table": "audit_logs",
+    "order": "occurred_at.desc",
+    "cols": "audit_id,actor_id,actor_role,action,entity_type,entity_id,old_status,new_status,request_id,occurred_at",
+    "roles": [
+      "safety_admin"
+    ],
+    "cap": "view.audit",
+    "filters": [
+      "entity_id",
+      "entity_type",
+      "actor_id"
+    ]
+  },
+  "admin.knowledge": {
+    "table": "knowledge_articles",
+    "order": "article_id.asc",
+    "cols": "article_id,version_no,title,dimension,review_status,reviewed_by,reviewed_at,created_by,updated_at",
+    "roles": [
+      "safety_admin"
+    ],
+    "cap": "review.content"
+  },
+  "my.alerts": {
+    "table": "alerts",
+    "order": "occurred_at.desc",
+    "cols": "alert_id,gpsno,rule_code,evidence_id,occurred_at,status,is_replay",
+    "roles": [
+      "driver"
+    ],
+    "cap": "ack.my_alert",
+    "injectDriver": "driver_id"
+  },
+  "my.interventions": {
+    "table": "interventions",
+    "order": "updated_at.desc",
+    "cols": "intervention_id,alert_id,status,sent_text,sent_at,read_at,reply_text,replied_at",
+    "roles": [
+      "driver"
+    ],
+    "cap": "reply.my_intervention",
+    "injectDriver": "driver_id"
+  },
+  "my.trainings": {
+    "table": "training_tasks",
+    "order": "due_at.asc",
+    "cols": "task_id,course_id,alert_id,goal,mandatory,due_at,status,started_at,submitted_at,learning_record,feedback,review_note,reviewed_at",
+    "roles": [
+      "driver"
+    ],
+    "cap": "view.my_training",
+    "injectDriver": "driver_id"
+  },
+  "my.score": {
+    "table": "score_snapshots",
+    "order": "as_of_date.desc",
+    "cols": "score_id,safety_score,rank,risk_level,score_change_7d,confidence_level,as_of_date,window_start,top_reason_1,top_reason_2,top_reason_3,primary_risk_dimension,recommended_action,behavior_safety_score,confidence_adjusted_floor,forecast_40d_risk_prob,source_version,history_contribution,fatigue_distraction_contribution,driving_stability_contribution,road_rule_contribution,management_contribution,imu_evidence_contribution",
+    "roles": [
+      "driver"
+    ],
+    "cap": "view.my_score",
+    "injectDriver": "driver_id"
+  },
+  "my.score_history": {
+    "table": "score_history",
+    "order": "as_of_date.asc",
+    "cols": "score_id,as_of_date,safety_score,risk_level,confidence_level,history_contribution,fatigue_distraction_contribution,driving_stability_contribution,road_rule_contribution,management_contribution,imu_evidence_contribution,source_version",
+    "roles": [
+      "driver"
+    ],
+    "cap": "view.my_score",
+    "injectDriver": "driver_id"
+  },
+  "my.review_requests": {
+    "table": "review_requests",
+    "order": "created_at.desc",
+    "cols": "request_id,score_id,evidence_id,reason_code,description,status,review_note,reviewer_id,created_at,updated_at",
+    "roles": [
+      "driver"
+    ],
+    "cap": "submit.score_challenge",
+    "injectDriver": "driver_id"
+  },
+  "my.notifications": {
+    "table": "notification_events",
+    "order": "created_at.desc",
+    "cols": "notification_id,source_entity_id,type,title,body,read_at,created_at",
+    "roles": [
+      "driver"
+    ],
+    "cap": null,
+    "injectUser": "target_user_id"
+  }
+}

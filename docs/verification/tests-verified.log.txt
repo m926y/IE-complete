@@ -1,0 +1,325 @@
+▶ S1 lifecycle, both-role account settings, credential revocation and vehicle labels
+  ✔ unauthenticated requests are refused (3.3503ms)
+  ✔ admin creates a new driver and receives one-time credential (39.4615ms)
+  ✔ new driver must change password before business APIs (48.1666ms)
+  ✔ wrong current password and weak new password are rejected (75.0615ms)
+  ✔ password change invalidates every old session and old credential (245.7192ms)
+  ✔ both roles save profile and avatar; user_id and role cannot expand access (28.0185ms)
+  ✔ rename checks current password and uniqueness, persists across login (120.5156ms)
+  ✔ driver sees only own persistent vehicle alias (14.3187ms)
+  ✔ driver cannot create accounts and audit contains no credentials (2.6362ms)
+  ✔ admin creation also enforces first login password change (79.6186ms)
+  ✔ new driver can be verified and bound through existing S1 business endpoint (15.2259ms)
+  ✔ account deletion refuses self, driver and cross-fleet writes (48.2879ms)
+  ✔ deleting account removes login, revokes sessions, closes bindings and retains history (14.6299ms)
+✔ S1 lifecycle, both-role account settings, credential revocation and vehicle labels (1148.9593ms)
+▶ Notification and task centers derive scoped, persistent, actionable state
+  ✔ Counts and lists share current fleet scope with no 50-row notification truncation (16.2973ms)
+  ✔ Reading a notification never completes its task and persists across service restart (7.2068ms)
+  ✔ Removal persists per account, preserves business records and can be undone (5.562ms)
+  ✔ Closing actual business objects removes tasks; reviewed training is no longer pending (0.8727ms)
+  ✔ Driver view stays private and binding/disable changes revoke access immediately (1.5377ms)
+✔ Notification and task centers derive scoped, persistent, actionable state (47.6569ms)
+▶ agent weekly reports, Excel account batches and confirmed training tools
+  ✔ drivers and unauthenticated users cannot create reports or write batches (23.7037ms)
+  ✔ all 500 vehicles, exact averages, distributions and seven real daily points are counted (238.47ms)
+  ✔ specific dates and cohort analysis never fabricate missing data (641.6752ms)
+  ✔ report creates downloadable HTML and Markdown, with no business writes (205.4504ms)
+  ✔ officer imports drivers with confirmation but cannot create administrators (97.7512ms)
+  ✔ account import rejects invalid names, existing users, unknown fields and duplicate rows (16.2129ms)
+  ✔ preview creates no accounts; confirmation, ownership and idempotent commit are enforced (87.3005ms)
+  ✔ credentials are encrypted at rest, never in plans, owner-only and one-time (13.6389ms)
+request failed request_id=req-73d7c0da6b300fc7 status=500 stack=Error: agent_transaction_failed
+    at agentRPC (file:///C:/Users/mzy/Desktop/%E8%B5%84%E6%96%99/_%E6%95%B4%E7%90%86%E5%B7%A5%E4%BD%9C/extracted/agent-platform/server.mjs:3779:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async Object.handleAgentApi [as handler] (file:///C:/Users/mzy/Desktop/%E8%B5%84%E6%96%99/_%E6%95%B4%E7%90%86%E5%B7%A5%E4%BD%9C/ex
+  ✔ fault halfway through account creation rolls back all new users and plan state (82.4687ms)
+  ✔ training never defaults missing course, target or deadline and creates no plan (16.4021ms)
+  ✔ training plans use approved courses, verified current bindings and explicit target groups (28.3532ms)
+request failed request_id=req-f35483c60dd983c0 status=500 stack=Error: agent_transaction_failed
+    at agentRPC (file:///C:/Users/mzy/Desktop/%E8%B5%84%E6%96%99/_%E6%95%B4%E7%90%86%E5%B7%A5%E4%BD%9C/extracted/agent-platform/server.mjs:3779:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async Object.handleAgentApi [as handler] (file:///C:/Users/mzy/Desktop/%E8%B5%84%E6%96%99/_%E6%95%B4%E7%90%86%E5%B7%A5%E4%BD%9C/ex
+  ✔ training notifications and tasks roll back together on failure (19.5702ms)
+  ✔ all grades and confidence levels receive training, with independent repeat batches (452.2202ms)
+  ✔ course creation prepares and saves a draft without approving or assigning it (13.2467ms)
+  ✔ expired and obsolete score-version plans cannot execute (40.3836ms)
+  ✔ Account import binds optional vehicle atomically and keeps blank rows unbound (80.1846ms)
+  ✔ Vehicle mapping is rechecked at commit and a conflict rolls the whole batch back (68.3723ms)
+  ✔ Excel and CSV mapping preserves values and rejects ambiguous headers (74.6812ms)
+✔ agent weekly reports, Excel account batches and confirmed training tools (6100.2765ms)
+✔ complete device conversations survive logout, new sessions, time and account switching (39.7584ms)
+▶ AI replies render readable Markdown without executing model content
+  ✔ Headings, emphasis, ordered lists and line breaks are readable (10.0929ms)
+  ✔ GFM tables, task lists and nested lists retain structure (5.1606ms)
+  ✔ Code and meaningful symbols survive without global stripping (1.8159ms)
+  ✔ Raw HTML, dangerous links and images cannot execute or load (2.4212ms)
+  ✔ Valid source links open safely and plain text still displays (1.0453ms)
+✔ AI replies render readable Markdown without executing model content (279.9224ms)
+✔ rule audit flags ungrounded claims and passes grounded answers (1.7515ms)
+✔ answer auditor: llm review reduces false positives, confirms hallucinations, degrades gracefully (0.6802ms)
+✔ conditional suggestions and honest refusals never become completed-operation claims (0.2238ms)
+✔ screenshot scenario explains the actual deletion workflow without inventing an execution (0.3727ms)
+✔ tool errors produce specific causes and next steps, with exact artifact counts (0.3862ms)
+▶ Course authoring, private attachments and mixed driver assessment
+  ✔ Staff upload accepts document and range reads; driver upload is refused (20.2698ms)
+  ✔ Create, validate and review mixed course; unaudited course is never approved implicitly (21.9929ms)
+  ✔ Assigned driver sees questions without answer keys; submits only complete responses and server computes grades (24.7402ms)
+✔ Course authoring, private attachments and mixed driver assessment (399.4319ms)
+✔ Release data manifest contains the complete query and factor-recompute inputs (9.3297ms)
+✔ Distribution bootstrap creates random local accounts, requires a first password change, and preserves existing accounts (1990.2868ms)
+✔ The relative history path works with a temporary business copy and the private full-data gateway (3816.2601ms)
+✔ Model files have no author-specific Python or scoring-data directory (11.2659ms)
+▶ Merged driver features retain real full-data ownership, learning gates, frozen content and both staff roles
+  ✔ Driver pages authenticate and safety officers have scoped business access without model privileges (38.5006ms)
+  ✔ A driver brief uses real indexed ISO events and all 500 fleet scores; repeat publication is idempotent (108.2859ms)
+  ✔ Staff inspect only cited events in authorized reports, while driver and out-of-fleet requests remain denied (38.2642ms)
+  ✔ Goal help creates an officer todo, reply reaches driver, and reading does not close the request (53.6129ms)
+  ✔ Frozen assignment content survives a course edit and stale draft writes are rejected (83.0835ms)
+  ✔ Free text cannot bypass reflection requirements, and resubmission delivers a new attempt (105.3195ms)
+  ✔ Unsubmitted quiz notes and selections persist without scoring or exposing answers (48.9554ms)
+  ✔ Shadow candidates stay private and rebinding revokes previous report access (34.1813ms)
+  ✔ Daily background batches cover all 500 vehicles without needing an open driver page (22913.1104ms)
+✔ Merged driver features retain real full-data ownership, learning gates, frozen content and both staff roles (27117.5113ms)
+✔ Course authoring validates question types, keys and private media URLs (0.8066ms)
+✔ Server grades choices, requires written answers and does not pretend to grade essays (1.1606ms)
+▶ Score governance and evaluation-to-action preserve versions and enforce C/D tiers
+  ✔ Factor catalog matches 24 frozen events; policy tiers keep low confidence separate (49.7438ms)
+  ✔ Draft designs and impact preview never change live scores (1945.6879ms)
+  ✔ Restore creates a new immutable version with exact archived values (2473.9379ms)
+  ✔ A/B, low confidence and out-of-scope drivers cannot receive training (7.1938ms)
+  ✔ C and D prepare real reading plans of 18 and 30 questions, with no task writes (16.4924ms)
+  ✔ Unapproved/version-changed course prevents whole plan; task and notices roll back on failure (9.9268ms)
+  ✔ Confirmed plans create tiered tasks and notices once; measures reflect actual execution (49.2394ms)
+  ✔ Reminder retries do not duplicate; old tasks keep assignment snapshot after weight changes (1857.1747ms)
+✔ Score governance and evaluation-to-action preserve versions and enforce C/D tiers (8533.6733ms)
+▶ full persistent data, 500-vehicle pagination and own-data boundaries
+  ✔ Safety officers keep business access but cannot read/write model configuration or promote administrators (84.5773ms)
+  ✔ Handover HTTP authenticates officers, ignores forged actor, persists receipts and denies drivers (118.8652ms)
+  ✔ manifest reports complete source counts and exact official score match (5.1879ms)
+  ✔ all 500 scores are reachable beyond the first 200 (28.0455ms)
+  ✔ A-level filter and numeric descending order are correct (6.6511ms)
+  ✖ 14 dates and 7000 history rows are available (23.8473ms)
+  ✔ all evidence ledger rows and all forecasts are queryable (7.4593ms)
+  ✔ event evidence is full indexed data with date filtering (8.939ms)
+  ✔ trajectory, IMU and profiles have full source coverage (32.8672ms)
+  ✔ driver cannot read administrator data or another vehicle (13.4183ms)
+  ✔ restricted staff scope is applied before querying and counting (23.5852ms)
+  ✔ private data gateway requires its token and blocks direct fact updates (3.5078ms)
+  ✔ AI data tool can page across all grades without any model call (129.2183ms)
+  ✔ center API requires login and ignores forged actor on read (18.755ms)
+  ✔ offline HTTP booking authenticates, persists invitations atomically and supports cancellation (42.2481ms)
+  ✔ vehicle binding, replacement, conflict and unlink update live driver access (70.4072ms)
+  ✔ profile changes and sessions survive restarting the platform process (165.0362ms)
+✖ full persistent data, 500-vehicle pagination and own-data boundaries (4115.448ms)
+▶ Daily handovers: Shanghai cutoff, durable scheduler, complete scoped snapshots and explicit receipt
+  ✔ Active officers get daily schedule, drivers cannot access, finish time enforced (1.8104ms)
+  ✔ Current preview is usable before shift end without creating an official report (10.6601ms)
+  ✔ Automatic generation needs no open browser; full backlog and actual date window (11.9513ms)
+  ✔ Idempotent across scheduler, manual generation and restart; snapshot frozen (4.173ms)
+  ✔ Assign, unread notification, explicit receipt and audit without closing business tasks (12.7303ms)
+  ✔ Role, fleet and account changes revoke archived report and notifications immediately (1.9974ms)
+  ✔ Missed days catch up, flag actual snapshot time, disabled settings respected (15.4491ms)
+  ✔ Business notifications and report creation are atomic on audit failure (2.1652ms)
+✔ Daily handovers: Shanghai cutoff, durable scheduler, complete scoped snapshots and explicit receipt (74.1005ms)
+✔ Model outage preserves fact summary, retry bounded, resumed conversations not falsely pending (15.9404ms)
+✔ Model gateway sends whitelisted context, forbids invented references and never leaks provider errors (0.7751ms)
+✔ Handover includes the same scoped equipment checks as action center (11.232ms)
+✔ Manually added priorities can be removed only by their author with audit retained (10.333ms)
+▶ Persistent two-way messages, current scope, read receipts and retry safety
+  ✔ Contacts enforce role, current verified fleet and privacy (7.7718ms)
+  ✔ Both parties initiate and continue conversation; unread is per recipient (2.0523ms)
+  ✔ Retry is idempotent; conflicting key, blank and oversized text refused (0.3452ms)
+  ✔ Read receipt can only acknowledge messages addressed to self, unseen later messages stay unread (1.0489ms)
+  ✔ History persists across service reinitialization; pagination has no omissions (11.1973ms)
+  ✔ Audit failure rolls message back; audit contains no full chat text (0.4381ms)
+  ✔ Rebinding or disabling revokes access immediately (0.2664ms)
+✔ Persistent two-way messages, current scope, read receipts and retry safety (29.3269ms)
+✔ Duty intervals preserve swaps, enforce uniqueness and never invent earlier identity (6.7591ms)
+Model recompute failed: Traceback (most recent call last):
+  File "[WORKSPACE]\_整理工作\extracted\agent-platform\scripts\recompute-model.py", line 6, in <module>
+    from scoring_source.scoring import enhanced,evidence_score
+  File "[WORKSPACE]\_整理工作\extracted\agent-platform\scripts\scoring_source\scoring\enhanced.py", line 9, in <module>
+    from scipy.optimize import minimize
+ModuleNotFoundError: No module named 'scipy'
+
+✖ Model rules actually recompute original events, preview is read only and restore recovers baseline (3003.7464ms)
+▶ Offline reservations enforce scope, time conflicts, atomic notifications and cancellation
+  ✔ Unauthorized, out-of-fleet, A/B, invalid and past times are rejected (3.1446ms)
+  ✔ Notification failure rolls back reservation, membership and audit (0.6662ms)
+  ✔ Booking notifies exactly the selected drivers; month calendar and driver view remain private (1.4377ms)
+  ✔ Retry does not duplicate messages; room and attendee conflicts block overlaps but allow adjacency (1.0806ms)
+  ✔ Cancellation persists, releases room and notifies attendees once (1.0322ms)
+✔ Offline reservations enforce scope, time conflicts, atomic notifications and cancellation (15.3576ms)
+✔ grade ratio validation rejects invalid totals and noninteger percentages (1.3641ms)
+✖ overview updates keep role gates, published scores, pagination and schedule consistent (1621.4814ms)
+▶ Case learning context, business links and completion messages are scoped and durable
+  ✔ Context reads only current scoped case and caller conversation; no cross-account leakage (2.7981ms)
+  ✔ Attachments validate task and case ownership and are immutable on retry (0.7515ms)
+  ✔ Assignment push and completion push are idempotent, unread and linked to task and case (1.7838ms)
+  ✔ Rebinding removes old case links and conversations from context; duplicate binding rejects completion (0.6072ms)
+✔ Case learning context, business links and completion messages are scoped and durable (10.7264ms)
+▶ Case dispositions execute scoped, atomic, idempotent platform actions
+  ✔ Preview has no message or training side effects; scope and confirmation enforced (12.0366ms)
+  ✔ Case, binding, score, approval and parking are revalidated before execution (1.2348ms)
+  ✔ Notification failure rolls the whole execution back, including chat and case state (0.7995ms)
+  ✔ Confirmed execution creates real linked tasks, messages and followups once (1.1937ms)
+  ✔ Existing training is reused and linked; completion requires evidence and actual task review (1.8057ms)
+✔ Case dispositions execute scoped, atomic, idempotent platform actions (21.8147ms)
+✖ Risk HTTP API uses real history and SQLite, never caller-supplied identity (1544.6439ms)
+▶ Historical risk clock, evidence, delivery, permissions and intervention lifecycle
+  ✔ Roles, source bounds and scope are validated (1.8226ms)
+  ✔ Event, case, notice and cursor commit atomically if notification persistence fails (1.5647ms)
+  ✔ Next-event clock does not see future facts; repeated transport and pieces are merged (2.8748ms)
+  ✔ Driver sees only intended binding and truthful page receipt; speed zero is not parking (0.946ms)
+  ✔ Clock runs on server without client polling; ordinary episodes do not create cloud driver alerts (9.5622ms)
+  ✔ All rule families retain evidence, junction upgrade and P95 remain disabled, case IDs are replay-only (33.6143ms)
+  ✔ Red pending response escalates once without fabricating terminal delivery (4.3209ms)
+  ✔ Human review, intervention, explicit demo parking, scoped feedback and closure are required (13.1353ms)
+  ✔ Completed replay groups vehicle and rule, retaining event times and original case access (39.2222ms)
+  ✔ Binding changes and disablement revoke prior case access, restart pauses clock (3.346ms)
+✔ Historical risk clock, evidence, delivery, permissions and intervention lifecycle (117.9173ms)
+✖ build emits a standalone dynamic QW Page and serves healthy root (3.7014ms)
+✔ Trend orders real dates, scopes to one vehicle and keeps missing scores distinct from zero (2.1177ms)
+✔ Plot uses elapsed time and a fixed 0–100 scale, with gaps between scoring versions (0.1784ms)
+✔ All 500 current vehicles have real dated series whose latest point matches their snapshot (594.6675ms)
+▶ weight editing recalculates every vehicle atomically with immutable version history
+  ✔ only full-scope safety administrators can edit global weights (7.3911ms)
+  ✔ invalid sums, missing dimensions and invalid values cannot change scores (493.6337ms)
+  ✔ preview is read-only and original weights reproduce published scores (569.3467ms)
+  ✔ submission updates all 500 scores, all history rows and 6267 ledger rows (1965.6065ms)
+  ✔ ledger totals, ranks, levels and seven-day changes use the new weights (88.0297ms)
+  ✔ retry is idempotent and stale proposals are rejected (516.919ms)
+  ✔ original scores remain accessible as an unchanged historical version (9.4943ms)
+request failed request_id=req-f46fd5246cfacf71 status=500 stack=Error: scoring_recompute_failed
+    at Object.handleScoreWeights [as handler] (file:///C:/Users/mzy/Desktop/%E8%B5%84%E6%96%99/_%E6%95%B4%E7%90%86%E5%B7%A5%E4%BD%9C/extracted/agent-platform/server.mjs:732:25)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async Server.<anonymous> (file:///C:/Users/mzy/Desktop/%E8%B5%84%E6%96%99/_%E6%95%B4%E7%90%86%E5%B7%A
+  ✔ a failure partway through saving rolls back scores, rules and active version (1326.919ms)
+  ✔ zero weights and restoring the original weights both work without cumulative drift (3681.8409ms)
+  ✔ rule drafts require validation, review, and explicit activation through HTTP (4532.151ms)
+✔ weight editing recalculates every vehicle atomically with immutable version history (16759.7198ms)
+✔ explicit training intake handles the reported completed form without guessing (1.3639ms)
+▶ Interactive courses: approval, scoped multi-driver assignment, durable server grading and task review
+  ✔ Authentication and roles protect catalog, install and batch endpoints (9.6049ms)
+  ✔ Installing all 17 legacy and reading courses is explicit, idempotent and never approves or assigns (99.449ms)
+  ✔ Unapproved course assignment is refused without tasks; human approval state machine remains required (13.8445ms)
+  ✔ Out-of-scope target rejects entire selection before writes (2.4142ms)
+  ✔ Batch distributes to distinct verified drivers, reports unverified driver, and retry does not duplicate tasks/notices (41.295ms)
+  ✔ Notification failure reports the created task and retry repairs delivery without duplicating it (13.7984ms)
+  ✔ A colliding registered course version is never overwritten or distributed (4.6196ms)
+  ✔ New lesson is visible only to its intended driver, with unsolved keys and explanations hidden (11.042ms)
+  ✔ Custom courses require a scenario answer, personal reflection and action; other drivers cannot read them (16.7522ms)
+  ✔ Legacy record and submission APIs cannot forge a quiz grade or erase answer state (6.3233ms)
+  ✔ Answers must be valid and sequential; server ignores fabricated score and persists only first submission (17.6405ms)
+  ✔ Server restart restores progress from database and does not expose future keys (174.5983ms)
+  ✔ Concurrent duplicate submissions cannot overwrite or double-count (12.0026ms)
+  ✔ Multi-select partial answer earns zero; total is server-calculated and submission is immutable (25.0712ms)
+  ✔ Admin can inspect grade, review through existing workflow, while other driver progress stays empty (20.1363ms)
+  ✔ Reading-course bank preserves six-question version and rejects A/B assignments across the legacy endpoint (48.3971ms)
+  ✔ Reading closure requires action plan, rejects failed approval, archives retry and notifies review (73.9611ms)
+  ✔ Officers cannot delete other creators tasks or courses and groups; denials do not write (38.8494ms)
+  ✔ Officer can delete own tasks only; mixed batch is rejected before any write (47.2652ms)
+  ✔ Task deletion is scoped, preserves learning records and removes both role lists (19.9159ms)
+  ✔ Batch task deletion validates selection, scope and stale versions before writing (31.9759ms)
+  ✔ Cross-module reading, saved answers, required fields and driver submission form a complete flow (52.1499ms)
+  ✔ Safety officer shares staff operations while parameter writes remain forbidden (77.9361ms)
+  ✔ Course groups persist, deliver all member courses idempotently and keep prior tasks after removal (38.5519ms)
+✔ Interactive courses: approval, scoped multi-driver assignment, durable server grading and task review (1319.3973ms)
+✔ Editing one weight leaves every other displayed dimension unchanged (1.196ms)
+✔ All characters can be deleted and retyped without a forced leading zero (0.1906ms)
+✔ Total stays at or below 100 with no redistribution, including 0 and 100 endpoints (0.1953ms)
+✔ Preview and save reject incomplete totals at exact hundredth-percent precision (0.1769ms)
+✔ Loaded high precision versions display 100% without mutating the source (0.2129ms)
+ℹ tests 198
+ℹ suites 0
+ℹ pass 192
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 82983.11
+
+✖ failing tests:
+
+test at tests\full-data.test.mjs:47:13
+✖ 14 dates and 7000 history rows are available (23.8473ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  8 !== 14
+  
+      at TestContext.<anonymous> (file:///C:/Users/mzy/Desktop/%E8%B5%84%E6%96%99/_%E6%95%B4%E7%90%86%E5%B7%A5%E4%BD%9C/extracted/agent-platform/tests/full-data.test.mjs:47:161)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async TestContext.<anonymous> (file:///C:/Users/mzy/Desktop/%E8%B5%84%E6%96%99/_%E6%95%B4%E7%90%86%E5%B7%A5%E4%BD%9C/extracted/agent-platform/tests/full-data.test.mjs:47:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 8,
+    expected: 14,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\model-duty.test.mjs:4:1
+✖ Model rules actually recompute original events, preview is read only and restore recovers baseline (3003.7464ms)
+  Error: model_recompute_failed
+      at error (file:///C:/Users/mzy/Desktop/%E8%B5%84%E6%96%99/_%E6%95%B4%E7%90%86%E5%B7%A5%E4%BD%9C/extracted/agent-platform/server/scoring-engine.mjs:13:49)
+      at prepare (file:///C:/Users/mzy/Desktop/%E8%B5%84%E6%96%99/_%E6%95%B4%E7%90%86%E5%B7%A5%E4%BD%9C/extracted/agent-platform/server/scoring-engine.mjs:58:436)
+      at Object.precompute (file:///C:/Users/mzy/Desktop/%E8%B5%84%E6%96%99/_%E6%95%B4%E7%90%86%E5%B7%A5%E4%BD%9C/extracted/agent-platform/server/scoring-engine.mjs:61:985)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestContext.<anonymous> (file:///C:/Users/mzy/Desktop/%E8%B5%84%E6%96%99/_%E6%95%B4%E7%90%86%E5%B7%A5%E4%BD%9C/extracted/agent-platform/tests/model-duty.test.mjs:5:443)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    status: 503,
+    code: 'model_recompute_failed'
+  }
+
+test at tests\overview-updates.test.mjs:22:1
+✖ overview updates keep role gates, published scores, pagination and schedule consistent (1621.4814ms)
+  TypeError [Error]: Cannot read properties of undefined (reading 'driver_id')
+      at TestContext.<anonymous> (file:///C:/Users/mzy/Desktop/%E8%B5%84%E6%96%99/_%E6%95%B4%E7%90%86%E5%B7%A5%E4%BD%9C/extracted/agent-platform/tests/overview-updates.test.mjs:26:406)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests\risk-monitor-api.test.mjs:13:1
+✖ Risk HTTP API uses real history and SQLite, never caller-supplied identity (1544.6439ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert(driver)
+  
+      at TestContext.<anonymous> (file:///C:/Users/mzy/Desktop/%E8%B5%84%E6%96%99/_%E6%95%B4%E7%90%86%E5%B7%A5%E4%BD%9C/extracted/agent-platform/tests/risk-monitor-api.test.mjs:16:261)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests\runtime.test.mjs:85:1
+✖ build emits a standalone dynamic QW Page and serves healthy root (3.7014ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    [
+  -   'cloud-seed',
+      'dist',
+      'package-lock.json',
+      'package.json',
+      'scripts',
+      'server',
+  
+      at TestContext.<anonymous> (file:///C:/Users/mzy/Desktop/%E8%B5%84%E6%96%99/_%E6%95%B4%E7%90%86%E5%B7%A5%E4%BD%9C/extracted/agent-platform/tests/runtime.test.mjs:94:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 'dist', 'package-lock.json', 'package.json', 'scripts', 'server', 'server.mjs' ],
+    expected: [ 'cloud-seed', 'dist', 'package-lock.json', 'package.json', 'scripts', 'server', 'server.mjs' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

@@ -1,0 +1,10 @@
+.personal-record{box-sizing:border-box;width:100%;min-width:0;max-width:100%;gap:20px}
+.personal-record-field{min-width:0;max-width:100%}
+.personal-record-field h4{margin:0 0 10px;line-height:1.6}
+.personal-record-text{min-width:0;max-width:100%;margin:0;white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal;line-height:1.9}
+.personal-record-meta{display:grid;gap:10px;margin:0;padding-top:14px;border-top:1px solid var(--line,#e9e1f1);font-size:13px;line-height:1.8;color:var(--ink-2,#766a86);min-width:0}
+.personal-record-meta>div{display:grid;grid-template-columns:5em minmax(0,1fr);gap:10px;min-width:0}
+.personal-record-meta dt,.personal-record-meta dd{margin:0;overflow-wrap:anywhere}
+.training-review-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.training-review-grid>div{min-width:0;overflow-wrap:anywhere}
+@media(max-width:760px){.training-review-grid{grid-template-columns:minmax(0,1fr)}}

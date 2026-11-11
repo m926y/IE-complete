@@ -1,0 +1,22 @@
+{
+  "removed_generated_directories": [
+    "IE-Agent/.qw-pages",
+    "IE-Agent/.runtime-tmp",
+    "IE-Agent/scripts/scoring_source/__pycache__",
+    "IE-Agent/scripts/scoring_source/scoring/__pycache__",
+    "IE亮剑/src/__pycache__",
+    "IE亮剑/src/delivery/__pycache__",
+    "IE亮剑/src/features/__pycache__",
+    "IE亮剑/src/prediction/__pycache__",
+    "IE亮剑/src/scoring/__pycache__",
+    "IE亮剑/tests/__pycache__",
+    "IE亮剑/tests/features/__pycache__",
+    "IE亮剑/tests/prediction/__pycache__",
+    "IE亮剑/tests/scoring/__pycache__",
+    "IE亮剑/_work/agent_detail_optimized_render",
+    "IE亮剑/_work/agent_detail_render",
+    "IE亮剑/_work/agent_roadmap_render"
+  ],
+  "backup": "本地 .local-backup；仅差异文件，不含可再生成缓存",
+  "preserved": "数据库、原始数据、交付成果、原始文档、本机运行依赖"
+}

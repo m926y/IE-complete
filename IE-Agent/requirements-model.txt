@@ -1,0 +1,7 @@
+# Versions used by the verified Python 3.12 scoring environment.
+pandas==2.2.3
+numpy==1.26.4
+scipy==1.13.1
+scikit-learn==1.5.2
+duckdb==2.0.0
+pyarrow==22.0.0

@@ -1,0 +1,45 @@
+const { spawn } = require("node:child_process"); const fs = require("node:fs");
+const R="/mnt/pages/page-repo-9c562cfc-8c55-4fa4-b226-d9c5dae153f0";
+const kv=Object.fromEntries(fs.readFileSync("/tmp/qwenwork/app.env","utf8").split("\n").filter(Boolean).map(l=>{const i=l.indexOf("=");return[l.slice(0,i),l.slice(i+1)]}));
+const env={...process.env, HOST:"127.0.0.1", PORT:"3214", NODE_ENV:"development"};
+const child=spawn(process.execPath,[R+"/server.mjs"],{env,cwd:R,stdio:["ignore","ignore","pipe"]});
+let err=""; child.stderr.on("data",c=>err+=c); child.on("exit",c=>console.log("SERVER_EXIT",c));
+const B="http://127.0.0.1:3214";
+const U=async(p,o={})=>{try{const r=await fetch(B+p,{method:o.post?"POST":o.patch?"PATCH":"GET",headers:{"content-type":"application/json",...(o.ck?{cookie:o.ck}:{})},body:(o.post||o.patch)?JSON.stringify(o.body||{}):undefined});let j={};try{j=await r.json()}catch{};return{st:r.status,j,sc:(r.headers.getSetCookie?.()||[]).map(x=>x.split(";")[0]).find(x=>x.startsWith("claw_session="))}}catch(e){return{st:0,j:{_net:String(e).slice(0,60)},sc:undefined}}};
+let fails=0; const ck=(n,c,x="")=>{console.log((c?"PASS ":"FAIL ")+n, String(x).slice(0,150)); if(!c)fails++};
+const TB="task-b4eea549adaae799", TF="task-ffcbeb917783d526", T5="task-5c4b8d2be9543822";
+(async()=>{
+ let up=false;
+ for(let i=0;i<80;i++){ const h=await U("/healthz"); if(h.st===200){up=true;break;} await new Promise(r=>setTimeout(r,250)); }
+ if(!up){ console.log("SERVER_NOT_UP", err.slice(0,300)); process.exit(2); }
+ const LA=await U("/api/auth/login",{post:1,body:{username:"safety_admin",password:kv.ADMIN_PW}});
+ const LD=await U("/api/auth/login",{post:1,body:{username:"driver_demo",password:kv.DRIVER_PW}});
+ const A=LA.sc,D=LD.sc; ck("管理员/司机登录",Boolean(A&&D),JSON.stringify([LA.st,LD.st,LA.j._net||""]));
+ const before={tasks:(await U("/api/data/admin.trainings?limit=5",{ck:A})).j.total,notes:(await U("/api/data/admin.notifications?limit=1",{ck:A})).j.total,iv:(await U("/api/data/admin.interventions?limit=1",{ck:A})).j.total};
+ const r1=await U("/api/admin/training-assign",{post:1,ck:A,body:{course_id:"DEMO_C01",driver_id:"DEMO_D0149",due_at:"2026-11-15",alert_id:"alert-1e7ec09935dd735b"}});
+ ck("C01已批准重复分配→幂等命中既有task",r1.j.idempotent_replay===true&&r1.j.task_id===TF,JSON.stringify(r1.j).slice(0,110));
+ const r2=await U("/api/admin/training-assign",{post:1,ck:A,body:{course_id:"DEMO_C02",driver_id:"DEMO_D0149"}});
+ const r3=await U("/api/admin/training-assign",{post:1,ck:A,body:{course_id:"DEMO_C03",driver_id:"DEMO_D0149"}});
+ ck("C02/C03未批准→409",r2.j.error==="course_not_approved"&&r3.j.error==="course_not_approved",r2.j.error);
+ const s1=await U(`/api/training-tasks/${TB}/start`,{post:1,ck:D});
+ const s2=await U(`/api/training-tasks/${TB}/submit`,{post:1,ck:D,body:{learning_record:"x"}});
+ ck("reviewed任务start/submit→409",s1.st===409&&s2.st===409,JSON.stringify([s1.j.error,s2.j.error]));
+ const rv1=await U(`/api/training-tasks/${T5}/review`,{post:1,ck:A,body:{decision:"returned",reason:"重复决策测试"}});
+ const v5=await U(`/api/training-tasks/${T5}`,{ck:A});
+ ck("事后review→replay人工原结论不改写",rv1.j.idempotent_replay===true&&String(v5.j.task?.review_note||"").includes("满足完成条件")&&!String(v5.j.task?.review_note||"").includes("重复决策"),JSON.stringify(rv1.j).slice(0,90));
+ const dr1=await U("/api/data/admin.trainings?limit=5",{ck:D});
+ const dr2=await U("/api/training-tasks/not-exist-task",{ck:D});
+ const viewD=await U(`/api/training-tasks/${T5}`,{ck:D});
+ ck("司机403/404/本人200",dr1.st===403&&dr2.st===404&&viewD.st===200&&viewD.j.task?.driver_id==="DEMO_D0149");
+ const mine=await U("/api/data/my.trainings?limit=20",{ck:D});
+ ck("司机端3条reviewed带结论",(mine.j.rows||[]).length===3&&mine.j.rows.every(x=>x.status==="reviewed"&&x.review_note),JSON.stringify((mine.j.rows||[]).map(x=>x.status)));
+ const nA=await U(`/api/data/admin.notifications?limit=60&source_entity_id=${T5}`,{ck:A});
+ ck("T5通知assigned+submitted各1",(nA.j.rows||[]).length===2);
+ const after={tasks:(await U("/api/data/admin.trainings?limit=5",{ck:A})).j.total,notes:(await U("/api/data/admin.notifications?limit=1",{ck:A})).j.total,iv:(await U("/api/data/admin.interventions?limit=1",{ck:A})).j.total};
+ ck("电池零新增写入",JSON.stringify(before)===JSON.stringify(after),JSON.stringify([before,after]));
+ const views=await Promise.all([TB,TF,T5].map(t=>U(`/api/training-tasks/${t}`,{ck:A})));
+ ck("TR03复评三条均待下一周期",views.every(v=>v.j.reassess&&v.j.reassess.date===null));
+ console.log("STATE "+JSON.stringify(views.map(v=>({t:v.j.task?.task_id,s:v.j.task?.status,sub:v.j.task?.submitted_at,rev:v.j.task?.reviewed_at,tl:(v.j.timeline||[]).length,concl:String(v.j.task?.review_note||"").slice(0,26)}))));
+ console.log(fails?`BATTERY_${fails}_FAILED`:"BATTERY_OK");
+ child.kill("SIGTERM"); setTimeout(()=>process.exit(fails?1:0),200);
+})();

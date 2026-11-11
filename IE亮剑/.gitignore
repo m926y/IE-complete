@@ -1,0 +1,32 @@
+# Competition data and generated outputs must not be committed.
+.deps/
+data/raw/
+data/processed/
+outputs/
+runs/
+/submission/
+output/
+tmp/
+*.parquet
+*.gz
+*.zip
+*.7z
+*.rar
+
+# Local Python files.
+# LaTeX build artifacts.
+*.aux
+*.log
+*.out
+*.toc
+
+__pycache__/
+*.py[cod]
+.venv/
+docs/competition/dataset_description.pdf
+docs/REFERENCE_ANALYSIS_LOCAL_ONLY.md
+算法赛题答疑.pdf
+
+# Keep the small submission template, source code, configuration and docs.
+!data/templates/
+!data/templates/**

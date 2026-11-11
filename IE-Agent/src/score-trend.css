@@ -1,0 +1,22 @@
+.vehicle-score-trend { margin: 12px 0; }
+.vehicle-score-trend .panel-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.vehicle-score-trend .panel-title h3 { margin: 0; }
+.trend-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin: 18px 0 12px; }
+.trend-metrics > div { padding: 12px 16px; border-radius: 8px; background: #faf7fd; }
+.trend-metrics span { display: block; color: var(--ink-2); font-size: 12px; margin-bottom: 5px; }
+.trend-metrics b { font-size: 23px; color: #70508c; font-variant-numeric: tabular-nums; }
+.trend-metrics small { font-size: 12px; font-weight: normal; color: var(--ink-2); }
+.trend-period { color: var(--ink-2); font-size: 12px; margin-top: 14px; }
+.trend-chart-scroll { max-width: 100%; overflow-x: auto; }
+.trend-chart { display: block; width: 100%; min-width: 540px; max-height: 350px; overflow: visible; }
+.trend-chart text { font-size: 11px; fill: var(--ink-2); }
+.trend-grid { stroke: #eae4f0; stroke-dasharray: 4 4; }
+.trend-line { stroke: #9671be; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.trend-dot { stroke: #9671be; stroke-width: 2.5; fill: white; cursor: pointer; }
+.trend-dot:hover, .trend-dot:focus { fill: #9671be; outline: none; stroke-width: 4; }
+.trend-dot.low { stroke: #b07720; fill: #fff4dd; }
+.trend-detail { display: flex; flex-wrap: wrap; gap: 8px 20px; border-radius: 8px; background: #faf7fd; padding: 10px 14px; font-size: 13px; }
+.trend-low { color: #986215; }
+.trend-caption { margin: 10px 0; line-height: 1.7; }
+.vehicle-score-trend summary { cursor: pointer; font-size: 12px; color: var(--ink-2); }
+@media(max-width:700px) { .trend-metrics { gap: 6px; } .trend-metrics > div { padding: 10px 8px; } .trend-metrics b { font-size: 19px; } }
